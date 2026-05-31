@@ -1,0 +1,607 @@
+{% doc %}
+  @prompt
+    bulk inquiry form
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-bulk-inquiry-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-bulk-inquiry-header-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+  }
+
+  .ai-bulk-inquiry-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px;
+  }
+
+  .ai-bulk-inquiry-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+  }
+
+  .ai-bulk-inquiry-form-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .ai-bulk-inquiry-row-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .ai-bulk-inquiry-field-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-bulk-inquiry-field-full-{{ ai_gen_id }} {
+    grid-column: 1 / -1;
+  }
+
+  .ai-bulk-inquiry-label-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 500;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-bulk-inquiry-required-{{ ai_gen_id }} {
+    color: {{ block.settings.error_color }};
+  }
+
+  .ai-bulk-inquiry-input-{{ ai_gen_id }},
+  .ai-bulk-inquiry-textarea-{{ ai_gen_id }},
+  .ai-bulk-inquiry-select-{{ ai_gen_id }} {
+    padding: 12px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: 14px;
+    background-color: {{ block.settings.input_background_color }};
+    color: {{ block.settings.text_color }};
+    width: 100%;
+  }
+
+  .ai-bulk-inquiry-input-{{ ai_gen_id }}:focus,
+  .ai-bulk-inquiry-textarea-{{ ai_gen_id }}:focus,
+  .ai-bulk-inquiry-select-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.button_color }};
+    outline-offset: 2px;
+  }
+
+  .ai-bulk-inquiry-textarea-{{ ai_gen_id }} {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .ai-bulk-inquiry-button-{{ ai_gen_id }} {
+    padding: 14px 32px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+
+  .ai-bulk-inquiry-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-bulk-inquiry-success-{{ ai_gen_id }} {
+    padding: 16px;
+    background-color: {{ block.settings.success_bg_color }};
+    color: {{ block.settings.success_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    margin-top: 16px;
+  }
+
+  .ai-bulk-inquiry-error-{{ ai_gen_id }} {
+    padding: 16px;
+    background-color: {{ block.settings.error_bg_color }};
+    color: {{ block.settings.error_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    margin-top: 16px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-bulk-inquiry-row-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-bulk-inquiry-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<bulk-inquiry-form-{{ ai_gen_id }} class="ai-bulk-inquiry-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-bulk-inquiry-header-{{ ai_gen_id }}">
+    {% if block.settings.title != blank %}
+      <h2 class="ai-bulk-inquiry-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    {% endif %}
+    {% if block.settings.description != blank %}
+      <div class="ai-bulk-inquiry-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+    {% endif %}
+  </div>
+
+  {%- form 'contact' -%}
+    <input type="hidden" name="contact[inquiry_type]" value="bulk_order">
+    
+    <div class="ai-bulk-inquiry-form-{{ ai_gen_id }}">
+      <div class="ai-bulk-inquiry-row-{{ ai_gen_id }}">
+        <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+          <label for="ai-bulk-name-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+            {{ block.settings.name_label }}
+            <span class="ai-bulk-inquiry-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="text"
+            id="ai-bulk-name-{{ ai_gen_id }}"
+            name="contact[name]"
+            class="ai-bulk-inquiry-input-{{ ai_gen_id }}"
+            value="{{ form.name }}"
+            required
+            autocomplete="name"
+            {% if form.errors %}
+              aria-invalid="true"
+            {% endif %}
+          >
+        </div>
+
+        <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+          <label for="ai-bulk-email-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+            {{ block.settings.email_label }}
+            <span class="ai-bulk-inquiry-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="email"
+            id="ai-bulk-email-{{ ai_gen_id }}"
+            name="contact[email]"
+            class="ai-bulk-inquiry-input-{{ ai_gen_id }}"
+            value="{{ form.email }}"
+            required
+            autocomplete="email"
+            {% if form.errors %}
+              aria-invalid="true"
+            {% endif %}
+          >
+        </div>
+      </div>
+
+      <div class="ai-bulk-inquiry-row-{{ ai_gen_id }}">
+        <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+          <label for="ai-bulk-phone-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+            {{ block.settings.phone_label }}
+            {% if block.settings.phone_required %}
+              <span class="ai-bulk-inquiry-required-{{ ai_gen_id }}">*</span>
+            {% endif %}
+          </label>
+          <input
+            type="tel"
+            id="ai-bulk-phone-{{ ai_gen_id }}"
+            name="contact[phone]"
+            class="ai-bulk-inquiry-input-{{ ai_gen_id }}"
+            value="{{ form.phone }}"
+            autocomplete="tel"
+            {% if block.settings.phone_required %}required{% endif %}
+          >
+        </div>
+
+        <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+          <label for="ai-bulk-company-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+            {{ block.settings.company_label }}
+          </label>
+          <input
+            type="text"
+            id="ai-bulk-company-{{ ai_gen_id }}"
+            name="contact[company]"
+            class="ai-bulk-inquiry-input-{{ ai_gen_id }}"
+            autocomplete="organization"
+          >
+        </div>
+      </div>
+
+      <div class="ai-bulk-inquiry-row-{{ ai_gen_id }}">
+        <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+          <label for="ai-bulk-product-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+            {{ block.settings.product_label }}
+            <span class="ai-bulk-inquiry-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="text"
+            id="ai-bulk-product-{{ ai_gen_id }}"
+            name="contact[product_name]"
+            class="ai-bulk-inquiry-input-{{ ai_gen_id }}"
+            required
+          >
+        </div>
+
+        <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+          <label for="ai-bulk-quantity-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+            {{ block.settings.quantity_label }}
+            <span class="ai-bulk-inquiry-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="number"
+            id="ai-bulk-quantity-{{ ai_gen_id }}"
+            name="contact[quantity]"
+            class="ai-bulk-inquiry-input-{{ ai_gen_id }}"
+            min="1"
+            required
+          >
+        </div>
+      </div>
+
+      {% if block.settings.show_delivery_date %}
+        <div class="ai-bulk-inquiry-row-{{ ai_gen_id }}">
+          <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+            <label for="ai-bulk-delivery-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+              {{ block.settings.delivery_date_label }}
+            </label>
+            <input
+              type="text"
+              id="ai-bulk-delivery-{{ ai_gen_id }}"
+              name="contact[delivery_date]"
+              class="ai-bulk-inquiry-input-{{ ai_gen_id }}"
+              placeholder="DD/MM/YYYY"
+            >
+          </div>
+
+          <div class="ai-bulk-inquiry-field-{{ ai_gen_id }}">
+            <label for="ai-bulk-budget-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+              {{ block.settings.budget_label }}
+            </label>
+            <select
+              id="ai-bulk-budget-{{ ai_gen_id }}"
+              name="contact[budget_range]"
+              class="ai-bulk-inquiry-select-{{ ai_gen_id }}"
+            >
+              <option value="">Select budget range</option>
+              <option value="under-10000">Under ₹10,000</option>
+              <option value="10000-50000">₹10,000 - ₹50,000</option>
+              <option value="50000-100000">₹50,000 - ₹1,00,000</option>
+              <option value="100000-500000">₹1,00,000 - ₹5,00,000</option>
+              <option value="over-500000">Over ₹5,00,000</option>
+            </select>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="ai-bulk-inquiry-field-{{ ai_gen_id }} ai-bulk-inquiry-field-full-{{ ai_gen_id }}">
+        <label for="ai-bulk-message-{{ ai_gen_id }}" class="ai-bulk-inquiry-label-{{ ai_gen_id }}">
+          {{ block.settings.message_label }}
+          <span class="ai-bulk-inquiry-required-{{ ai_gen_id }}">*</span>
+        </label>
+        <textarea
+          id="ai-bulk-message-{{ ai_gen_id }}"
+          name="contact[body]"
+          class="ai-bulk-inquiry-textarea-{{ ai_gen_id }}"
+          required
+        >{{ form.body }}</textarea>
+      </div>
+
+      <div class="ai-bulk-inquiry-field-{{ ai_gen_id }} ai-bulk-inquiry-field-full-{{ ai_gen_id }}">
+        <button type="submit" class="ai-bulk-inquiry-button-{{ ai_gen_id }}">
+          {{ block.settings.button_text }}
+        </button>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <div class="ai-bulk-inquiry-success-{{ ai_gen_id }}">
+          {{ block.settings.success_message }}
+        </div>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="ai-bulk-inquiry-error-{{ ai_gen_id }}">
+          {{ form.errors.messages | first }}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endform -%}
+</bulk-inquiry-form-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BulkInquiryForm{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.form = this.querySelector('form');
+        if (this.form) {
+          this.setupFormValidation();
+        }
+      }
+
+      setupFormValidation() {
+        const deliveryInput = this.querySelector('#ai-bulk-delivery-{{ ai_gen_id }}');
+        if (deliveryInput) {
+          deliveryInput.addEventListener('blur', function() {
+            const value = this.value;
+            if (value && !value.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+              this.setCustomValidity('Please enter date in DD/MM/YYYY format');
+            } else {
+              this.setCustomValidity('');
+            }
+          });
+        }
+      }
+    }
+
+    customElements.define('bulk-inquiry-form-{{ ai_gen_id }}', BulkInquiryForm{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Bulk inquiry form",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Form content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Bulk Order Inquiry"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "Fill out the form below for bulk order inquiries and our team will get back to you shortly."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "name_label",
+      "label": "Name field label",
+      "default": "Full name"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "email_label",
+      "label": "Email field label",
+      "default": "Email address"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "phone_label",
+      "label": "Phone field label",
+      "default": "Phone number"
+    },
+    {
+      "type": "checkbox",
+      "id": "phone_required",
+      "label": "Make phone required",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "company_label",
+      "label": "Company field label",
+      "default": "Company name"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_label",
+      "label": "Product field label",
+      "default": "Product name"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "quantity_label",
+      "label": "Quantity field label",
+      "default": "Quantity needed"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_delivery_date",
+      "label": "Show delivery date and budget fields",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "delivery_date_label",
+      "label": "Delivery date field label",
+      "default": "Expected delivery date"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "budget_label",
+      "label": "Budget field label",
+      "default": "Budget range"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "message_label",
+      "label": "Message field label",
+      "default": "Additional details"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Submit inquiry"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for your inquiry! We will contact you within 24 hours."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "color",
+      "id": "input_background_color",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border",
+      "default": "#cccccc"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#e3fc02"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover background",
+      "default": "#d0e802"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "success_color",
+      "label": "Success text",
+      "default": "#008060"
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Success background",
+      "default": "#d4f4e8"
+    },
+    {
+      "type": "color",
+      "id": "error_color",
+      "label": "Error text",
+      "default": "#D82C0D"
+    },
+    {
+      "type": "color",
+      "id": "error_bg_color",
+      "label": "Error background",
+      "default": "#ffd4cc"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bulk inquiry form"
+    }
+  ]
+}
+{% endschema %}
