@@ -148,15 +148,15 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   z-index: 0;
 }
 
-.section + .section {
+/* .section + .section {
   margin-top: var(--spacing-sections-mobile);
-}
+} */
 
-@media screen and (min-width: 750px) {
+/* @media screen and (min-width: 750px) {
   .section + .section {
     margin-top: var(--spacing-sections-desktop);
   }
-}
+} */
 
 .element-margin-top {
   margin-top: 5rem;
@@ -2136,6 +2136,10 @@ input[type="checkbox"] {
 /* utility-bar */
 .utility-bar {
   height: 100%;
+  background: rgb(var(--color-background));
+  background: var(--gradient-background);
+  background-attachment: fixed;
+  padding: 0.8rem 1rem;
 }
 
 .utility-bar--bottom-border {
@@ -2414,10 +2418,9 @@ input[type="checkbox"] {
 
   .header--top-left,
   .header--middle-left:not(.header--has-menu) {
-    grid-template-areas:
-      "heading icons"
-      "navigation navigation";
-    grid-template-columns: 1fr auto;
+    grid-template-areas: "heading navigation icons";
+    grid-template-columns: auto 1fr auto;
+    column-gap: 2rem;
   }
 
   .header--top-left.drawer-menu,
@@ -2481,7 +2484,7 @@ input[type="checkbox"] {
 
 .header__heading-link {
   display: inline-block;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
   text-decoration: none;
   word-break: break-word;
 }
@@ -2843,7 +2846,7 @@ details[open] > .header__submenu {
 }
 
 .header__menu-item {
-  padding: 1.2rem;
+  padding: 0.8rem 1rem;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
 }
@@ -2892,6 +2895,9 @@ details[open] > .header__menu-item .icon-caret {
 
 .global-settings-popup,
 .header__submenu.global-settings-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
   border-radius: var(--popup-corner-radius);
   border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
   border-style: solid;
@@ -2899,17 +2905,24 @@ details[open] > .header__menu-item .icon-caret {
   box-shadow: var(--popup-shadow-horizontal-offset)
     var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius)
     rgba(var(--color-shadow), var(--popup-shadow-opacity));
-  z-index: -1;
+  z-index: 100;
+  margin-top: 0.5rem;
 }
 
 .header__submenu.list-menu {
   padding: 1rem 0;
+  min-width: 100%;
+  width: 20rem;
 }
 
 .header__submenu .header__submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 0.5rem;
+  margin-top: 0;
   background-color: rgba(var(--color-foreground), 0.03);
   padding: 1rem 0;
-  margin: 1rem 0;
 }
 
 .header__submenu .header__menu-item:after {
@@ -2937,6 +2950,10 @@ details[open] > .header__menu-item .icon-caret {
 
 header-menu > details,
 details-disclosure > details {
+  position: relative;
+}
+
+header-menu > details > summary {
   position: relative;
 }
 

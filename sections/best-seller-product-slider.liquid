@@ -1,0 +1,198 @@
+{{ 'best-seller-product-slider.css  ' | asset_url | stylesheet_tag }}
+
+<section class="cps section-{{ section.id }}">
+  <div class="cps__container">
+
+    {% if section.settings.heading != blank or section.settings.description != blank %}
+      <div class="cps__header">
+        {% if section.settings.heading != blank %}
+          <h2>{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p>{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% assign selected_collection = section.settings.collection %}
+
+    {% if selected_collection != blank and selected_collection.products_count > 0 %}
+      <div class="cps__slider-wrap">
+
+        <button class="cps__arrow cps__arrow--prev" type="button" aria-label="Previous">
+          &#8249;
+        </button>
+
+        <div class="cps__slider" id="CpsSlider-{{ section.id }}">
+          {% for product in selected_collection.products limit: section.settings.product_count %}
+            <div class="cps__slide">
+              <div class="cps-card">
+
+                <a href="{{ product.url }}" class="cps-card__image">
+                  {% if product.featured_image != blank %}
+                    {{
+                      product.featured_image
+                      | image_url: width: 700
+                      | image_tag: loading: 'lazy', alt: product.title
+                    }}
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  {% endif %}
+                </a>
+
+                <div class="cps-card__content">
+                  <a href="{{ product.url }}" class="cps-card__title">
+                    {{ product.title }}
+                  </a>
+
+                  {% if section.settings.show_price %}
+                    <div class="cps-card__price">
+                      {{ product.price | money }}
+                    </div>
+                  {% endif %}
+
+                  {% if section.settings.card_button_text != blank %}
+                    <form method="post" action="/cart/add" class="cps-card__form">
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                      >
+
+                      <button
+                        type="submit"
+                        class="cps-card__button"
+                        {% unless product.available %}disabled{% endunless %}
+                      >
+                        {% if product.available %}
+                          {{ section.settings.card_button_text }}
+                        {% else %}
+                          Sold Out
+                        {% endif %}
+                      </button>
+                    </form>
+                  {% endif %}
+                </div>
+
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <button class="cps__arrow cps__arrow--next" type="button" aria-label="Next">
+          &#8250;
+        </button>
+
+      </div>
+    {% else %}
+      <p class="cps__empty">Please select collection.</p>
+    {% endif %}
+
+    {% if section.settings.bottom_button_text != blank %}
+      <div class="cps__bottom">
+        <a href="{{ section.settings.bottom_button_url }}" class="cps__bottom-btn">
+          {{ section.settings.bottom_button_text }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.section-{{ section.id }}');
+    if (!section) return;
+
+    const slider = section.querySelector('#CpsSlider-{{ section.id }}');
+    const prevBtn = section.querySelector('.cps__arrow--prev');
+    const nextBtn = section.querySelector('.cps__arrow--next');
+
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    function getSlideWidth() {
+      const slide = slider.querySelector('.cps__slide');
+      if (!slide) return 300;
+
+      const gap = parseInt(window.getComputedStyle(slider).columnGap) || 20;
+      return slide.offsetWidth + gap;
+    }
+
+    prevBtn.addEventListener('click', function () {
+      slider.scrollBy({
+        left: -getSlideWidth(),
+        behavior: 'smooth'
+      });
+    });
+
+    nextBtn.addEventListener('click', function () {
+      slider.scrollBy({
+        left: getSlideWidth(),
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Discover our most loved toys by parents and kids"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_count",
+      "label": "Product Count",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "card_button_text",
+      "label": "Product Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show Price",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "bottom_button_text",
+      "label": "Bottom Button Text",
+      "default": "VIEW ALL"
+    },
+    {
+      "type": "url",
+      "id": "bottom_button_url",
+      "label": "Bottom Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Products Slider"
+    }
+  ]
+}
+{% endschema %}

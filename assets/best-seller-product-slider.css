@@ -1,0 +1,271 @@
+.cps {
+  padding: 40px 0;
+  background: #ffffff;
+}
+
+.cps__container {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 56px;
+}
+
+.cps__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.cps__header h2 {
+  margin: 0 0 10px;
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #111936;
+}
+
+.cps__header p {
+  margin: 0;
+  font-size: 16px;
+  color: #111936;
+}
+
+.cps__slider-wrap {
+  position: relative;
+}
+
+.cps__slider {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 72px) / 5);
+  column-gap: 18px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 2px 2px 12px;
+}
+
+.cps__slider::-webkit-scrollbar {
+  display: none;
+}
+
+.cps__slide {
+  height: 100%;
+}
+
+.cps-card {
+  height: 100%;
+  min-height: 385px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.cps-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.36 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fbf4ea;
+}
+
+.cps-card__image img,
+.cps-card__image svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cps-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+}
+
+.cps-card__title {
+  min-height: 48px;
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 800;
+  color: #06152f;
+  text-decoration: none;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cps-card__price {
+  margin: 0 0 12px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #06152f;
+}
+
+.cps-card__form {
+  margin-top: auto;
+}
+
+.cps-card__button {
+  width: 142px;
+  height: 54px;
+  border: 0;
+  border-radius: 0;
+  background: #008f86;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+}
+
+.cps-card__button:hover {
+  background: #007d76;
+}
+
+.cps-card__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cps__arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: #008f86;
+  color: #ffffff;
+  font-size: 32px;
+  line-height: 34px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+}
+
+.cps__arrow--prev {
+  left: -48px;
+}
+
+.cps__arrow--next {
+  right: -48px;
+}
+
+.cps__bottom {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.cps__bottom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  height: 50px;
+  padding: 0 24px;
+  border: 1.5px solid #008f86;
+  border-radius: 8px;
+  color: #008f86;
+  background: transparent;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.cps__bottom-btn:hover {
+  background: #008f86;
+  color: #ffffff;
+}
+
+.cps__empty {
+  text-align: center;
+  font-size: 16px;
+  color: #111936;
+}
+
+@media screen and (max-width: 1199px) {
+  .cps__container {
+    padding: 0 40px;
+  }
+
+  .cps__slider {
+    grid-auto-columns: calc((100% - 36px) / 3);
+  }
+
+  .cps__arrow--prev {
+    left: -20px;
+  }
+
+  .cps__arrow--next {
+    right: -20px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cps {
+    padding: 28px 0;
+  }
+
+  .cps__container {
+    padding: 0 18px;
+  }
+
+  .cps__header {
+    margin-bottom: 24px;
+  }
+
+  .cps__header h2 {
+    font-size: 28px;
+  }
+
+  .cps__header p {
+    font-size: 14px;
+  }
+
+  .cps__slider {
+    grid-auto-columns: 100%;
+    column-gap: 14px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .cps__slide {
+    scroll-snap-align: start;
+  }
+
+  .cps-card {
+    min-height: 390px;
+  }
+
+  .cps-card__title {
+    font-size: 17px;
+  }
+
+  .cps-card__button {
+    width: 140px;
+    height: 50px;
+    font-size: 12px;
+  }
+
+  .cps__arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 28px;
+  }
+
+  .cps__arrow--prev {
+    left: 4px;
+  }
+
+  .cps__arrow--next {
+    right: 4px;
+  }
+}
