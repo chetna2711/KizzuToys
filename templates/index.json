@@ -13,6 +13,7 @@
       "type": "featured-hero-cta",
       "name": "Featured Hero CTA",
       "settings": {
+        "image_desktop": "shopify://shop_images/1ac99729-ed18-4304-ba3d-c79838bea37c.png",
         "image_overlay_opacity": 0,
         "image_height": "medium",
         "image_behavior": "none",
