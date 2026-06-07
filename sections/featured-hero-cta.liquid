@@ -1,0 +1,523 @@
+{{ 'component-featured-hero-cta.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #HeroCTA-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+-%}
+
+<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
+  <div
+    id="HeroCTA-{{ section.id }}"
+    class="hero-cta hero-cta--content-align-{{ section.settings.desktop_content_alignment }} hero-cta--content-align-mobile-{{ section.settings.mobile_content_alignment }} hero-cta--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image_desktop != blank and section.settings.image_mobile != blank %} hero-cta--stacked{% endif %}{% if section.settings.image_height == 'adapt' and section.settings.image_desktop != blank %} hero-cta--adapt{% endif %}{% if section.settings.show_text_below %} hero-cta--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} hero-cta--desktop-transparent{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  >
+    {%- if section.settings.image_desktop != blank -%}
+      <div class="hero-cta__media media hero-cta__media-desktop{% if section.settings.image_desktop == blank and section.settings.image_mobile == blank %} placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+        {%- liquid
+          assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+          assign image_height = section.settings.image_desktop.width | divided_by: section.settings.image_desktop.aspect_ratio
+          if section.settings.image_behavior == 'ambient'
+            assign full_width = '120vw'
+            assign stacked_sizes = '(min-width: 750px) 60vw, 120vw'
+          elsif section.settings.image_behavior == 'fixed' or section.settings.image_behavior == 'zoom-in'
+            assign full_width = '100vw'
+            assign stacked_sizes = '100vw'
+          else
+            assign full_width = '100vw'
+            assign stacked_sizes = '(min-width: 750px) 100vw, 100vw'
+          endif
+        -%}
+        {{
+          section.settings.image_desktop
+          | image_url: width: 3840
+          | image_tag:
+            width: section.settings.image_desktop.width,
+            height: image_height,
+            sizes: full_width,
+            widths: widths,
+            fetchpriority: fetch_priority
+        }}
+      </div>
+    {%- else -%}
+      <div class="hero-cta__media media placeholder{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.image_mobile != blank -%}
+      <div class="hero-cta__media media hero-cta__media-mobile{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+        {%- liquid
+          assign image_height_mobile = section.settings.image_mobile.width | divided_by: section.settings.image_mobile.aspect_ratio
+        -%}
+        {{
+          section.settings.image_mobile
+          | image_url: width: 750
+          | image_tag:
+            width: section.settings.image_mobile.width,
+            height: image_height_mobile,
+            sizes: '100vw',
+            widths: '375, 550, 750',
+            fetchpriority: fetch_priority
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="hero-cta__content hero-cta__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="hero-cta__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+        {%- if section.settings.badge_text != blank -%}
+          <div class="hero-cta__badge" {{ block.shopify_attributes }}>
+            <span class="badge badge--{{ section.settings.badge_style }}">{{ section.settings.badge_text }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.heading_desktop != blank -%}
+          <h2 class="hero-cta__heading hero-cta__heading--desktop inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading_desktop }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.heading_mobile != blank -%}
+          <h2 class="hero-cta__heading hero-cta__heading--mobile inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading_mobile }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <div class="hero-cta__description rte {{ section.settings.text_style }}">
+            <p>{{ section.settings.description }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+          <div class="hero-cta__buttons{% if section.settings.button_label_1 != blank and section.settings.button_label_2 != blank %} hero-cta__buttons--multiple{% endif %}">
+            {%- if section.settings.button_label_1 != blank -%}
+              <a
+                {% if section.settings.button_link_1 == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.button_link_1 }}"
+                {% endif %}
+                class="button{% if section.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
+              >
+                {{- section.settings.button_label_1 | escape -}}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.button_label_2 != blank -%}
+              <a
+                {% if section.settings.button_link_2 == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.button_link_2 }}"
+                {% endif %}
+                class="button{% if section.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
+              >
+                {{- section.settings.button_label_2 | escape -}}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Hero CTA",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image (Optional)"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Image Overlay Opacity",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to Image"
+        },
+        {
+          "value": "small",
+          "label": "Small (400px)"
+        },
+        {
+          "value": "medium",
+          "label": "Medium (500px)"
+        },
+        {
+          "value": "large",
+          "label": "Large (600px)"
+        }
+      ],
+      "default": "medium",
+      "label": "Image Height"
+    },
+    {
+      "type": "select",
+      "id": "image_behavior",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "ambient",
+          "label": "Ambient"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed"
+        },
+        {
+          "value": "zoom-in",
+          "label": "Zoom In"
+        }
+      ],
+      "default": "none",
+      "label": "Image Animation"
+    },
+    {
+      "type": "header",
+      "content": "Badge Settings"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "New Collection"
+    },
+    {
+      "type": "select",
+      "id": "badge_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "primary",
+      "label": "Badge Style"
+    },
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_desktop",
+      "label": "Desktop Heading",
+      "default": "<p>Discover Our Latest Collection</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_mobile",
+      "label": "Mobile Heading",
+      "default": "<p>New Collection</p>"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2 (Large)"
+        },
+        {
+          "value": "h1",
+          "label": "H1 (Extra Large)"
+        },
+        {
+          "value": "h0",
+          "label": "H0 (Huge)"
+        },
+        {
+          "value": "hxl",
+          "label": "HXL (Extra Huge)"
+        },
+        {
+          "value": "hxxl",
+          "label": "HXXL (Maximum)"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading Size"
+    },
+    {
+      "type": "header",
+      "content": "Description Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Shop our newest arrivals and exclusive designs</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "value": "caption-with-letter-spacing",
+          "label": "Caption"
+        }
+      ],
+      "default": "body",
+      "label": "Text Style"
+    },
+    {
+      "type": "header",
+      "content": "Button 1 Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_1",
+      "default": false,
+      "label": "Use Secondary Button Style"
+    },
+    {
+      "type": "header",
+      "content": "Button 2 Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_2",
+      "default": true,
+      "label": "Use Secondary Button Style"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top Center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "middle-left",
+          "label": "Middle Left"
+        },
+        {
+          "value": "middle-center",
+          "label": "Middle Center"
+        },
+        {
+          "value": "middle-right",
+          "label": "Middle Right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "middle-center",
+      "label": "Desktop Content Position"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Desktop Content Alignment"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_box",
+      "default": true,
+      "label": "Show Text Box Background"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Content Box Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_images_on_mobile",
+      "default": true,
+      "label": "Stack Images on Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Mobile Content Alignment"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_below",
+      "default": true,
+      "label": "Show Text Below Image on Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "Section Background Color Scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Hero CTA"
+    }
+  ]
+}
+{% endschema %}
