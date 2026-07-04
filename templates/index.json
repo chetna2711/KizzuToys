@@ -207,12 +207,83 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "blocks_XYW3Dq": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_41f5fdc_GxTHfe": {
+          "type": "ai_gen_block_41f5fdc",
+          "settings": {
+            "heading": "What our customers say",
+            "subheading": "Real reviews from real customers",
+            "heading_alignment": "center",
+            "heading_size": 36,
+            "subheading_size": 16,
+            "desktop_width_percent": 100,
+            "cards_per_view": "3",
+            "cards_per_view_tablet": "2",
+            "card_gap": 20,
+            "background_color": "#ffffff",
+            "heading_color": "#1f1f21",
+            "text_color": "#1f1f21",
+            "card_background": "#f5f5f5",
+            "star_color": "#e3fc02",
+            "star_empty_color": "#d1d1d1",
+            "avatar_background": "#e0e0e0",
+            "nav_button_color": "#1f1f21",
+            "nav_button_hover_color": "#e3fc02",
+            "nav_icon_color": "#ffffff",
+            "dot_color": "#d1d1d1",
+            "dot_active_color": "#1f1f21",
+            "card_border_radius": 8,
+            "star_size": 20,
+            "review_text_size": 16,
+            "review_1_enabled": true,
+            "review_1_rating": 5,
+            "review_1_text": "Absolutely love these toys! My kids play with them every day and they're still in perfect condition.",
+            "review_1_author": "Sarah Johnson",
+            "review_1_title": "Verified buyer",
+            "review_2_enabled": true,
+            "review_2_rating": 5,
+            "review_2_text": "Great quality and fast shipping. The toys are educational and fun. Highly recommend!",
+            "review_2_author": "Michael Chen",
+            "review_2_title": "Verified buyer",
+            "review_3_enabled": true,
+            "review_3_rating": 4,
+            "review_3_text": "My daughter loves her new toys. They're safe, durable, and keep her entertained for hours.",
+            "review_3_author": "Priya Sharma",
+            "review_3_title": "Verified buyer",
+            "review_4_enabled": true,
+            "review_4_rating": 5,
+            "review_4_text": "Excellent customer service and amazing products. Will definitely order again!",
+            "review_4_author": "Rajesh Kumar",
+            "review_4_title": "Verified buyer",
+            "review_5_enabled": true,
+            "review_5_rating": 5,
+            "review_5_text": "Best toy store! The quality is outstanding and my kids are so happy with their new toys.",
+            "review_5_author": "Anita Desai",
+            "review_5_title": "Verified buyer",
+            "review_6_enabled": true,
+            "review_6_rating": 4,
+            "review_6_text": "Good value for money. The toys are well-made and my son enjoys playing with them daily.",
+            "review_6_author": "Vikram Patel",
+            "review_6_title": "Verified buyer"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_41f5fdc_GxTHfe"
+      ],
+      "name": "Customer reviews carousel",
+      "settings": {}
     }
   },
   "order": [
     "featured_hero_cta_YBrKyY",
     "featured_collection_cards_categories",
     "best_seller_product_slider_rrzeWc",
-    "why_choose_kizzu"
+    "why_choose_kizzu",
+    "blocks_XYW3Dq"
   ]
 }
