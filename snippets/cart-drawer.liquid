@@ -62,7 +62,7 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <h2 class="drawer__heading">Your Cart ({{ cart.item_count }})</h2>
         <button
           class="drawer__close"
           type="button"
@@ -475,26 +475,6 @@
         </form>
       </cart-drawer-items>
       <div class="drawer__footer">
-        {%- if settings.show_cart_note -%}
-          <details id="Details-CartDrawer">
-            <summary>
-              <span class="summary__title">
-                {{ 'sections.cart.note' | t }}
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>
-            </summary>
-            <cart-note class="cart__note field">
-              <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
-              <textarea
-                id="CartDrawer-Note"
-                class="text-area text-area--resize-vertical field__input"
-                name="note"
-                placeholder="{{ 'sections.cart.note' | t }}"
-              >{{ cart.note }}</textarea>
-            </cart-note>
-          </details>
-        {%- endif -%}
-
         <!-- Start blocks -->
         <!-- Subtotals -->
 
@@ -562,6 +542,7 @@
         <!-- CTAs -->
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
+          <a class="cart-drawer__view-cart button" href="{{ routes.cart_url }}">View Cart</a>
           <button
             type="submit"
             id="CartDrawer-Checkout"
@@ -572,7 +553,11 @@
               disabled
             {% endif %}
           >
-            {{ 'sections.cart.checkout' | t }}
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <rect x="4" y="8" width="12" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+              <path d="M7 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+            Checkout 
           </button>
         </div>
       </div>

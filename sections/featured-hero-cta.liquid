@@ -85,25 +85,40 @@
       <div class="hero-cta__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
         {%- if section.settings.badge_text != blank -%}
           <div class="hero-cta__badge" {{ block.shopify_attributes }}>
-            <span class="badge badge--{{ section.settings.badge_style }}">{{ section.settings.badge_text }}</span>
+            <span class="badge badge--{{ section.settings.badge_style }}">
+              <svg aria-hidden="true" viewBox="0 0 20 20">
+                <path d="M10 17.5 8.7 16.3C4.3 12.3 1.5 9.8 1.5 6.7 1.5 4.2 3.5 2.2 6 2.2c1.4 0 2.8.7 3.7 1.8.9-1.1 2.3-1.8 3.7-1.8 2.5 0 4.6 2 4.6 4.5 0 3.1-2.8 5.6-7.2 9.6L10 17.5Z"/>
+              </svg>
+              <span>{{ section.settings.badge_text }}</span>
+            </span>
           </div>
         {%- endif -%}
 
         {%- if section.settings.heading_desktop != blank -%}
-          <h2 class="hero-cta__heading hero-cta__heading--desktop inline-richtext {{ section.settings.heading_size }}">
-            {{ section.settings.heading_desktop }}
+          {%- liquid
+            assign desktop_heading = section.settings.heading_desktop | replace: '<p>', '' | replace: '</p>', '' | replace: '<br/>', '<br>' | replace: '<br />', '<br>' | split: '<br>'
+          -%}
+          <h2 class="hero-cta__heading hero-cta__heading--desktop {{ section.settings.heading_size }}">
+            {%- for line in desktop_heading -%}
+              <span class="hero-cta__heading-line hero-cta__heading-line--{{ forloop.index }}">{{ line }}</span>
+            {%- endfor -%}
           </h2>
         {%- endif -%}
 
         {%- if section.settings.heading_mobile != blank -%}
-          <h2 class="hero-cta__heading hero-cta__heading--mobile inline-richtext {{ section.settings.heading_size }}">
-            {{ section.settings.heading_mobile }}
+          {%- liquid
+            assign mobile_heading = section.settings.heading_mobile | replace: '<p>', '' | replace: '</p>', '' | replace: '<br/>', '<br>' | replace: '<br />', '<br>' | split: '<br>'
+          -%}
+          <h2 class="hero-cta__heading hero-cta__heading--mobile {{ section.settings.heading_size }}">
+            {%- for line in mobile_heading -%}
+              <span class="hero-cta__heading-line hero-cta__heading-line--{{ forloop.index }}">{{ line }}</span>
+            {%- endfor -%}
           </h2>
         {%- endif -%}
 
         {%- if section.settings.description != blank -%}
           <div class="hero-cta__description rte {{ section.settings.text_style }}">
-            <p>{{ section.settings.description }}</p>
+            {{ section.settings.description }}
           </div>
         {%- endif -%}
 
@@ -259,13 +274,13 @@
       "type": "richtext",
       "id": "heading_desktop",
       "label": "Desktop Heading",
-      "default": "<p>Discover Our Latest Collection</p>"
+      "default": "<p>Play.<br>Learn.<br>Grow!</p>"
     },
     {
       "type": "richtext",
       "id": "heading_mobile",
       "label": "Mobile Heading",
-      "default": "<p>New Collection</p>"
+      "default": "<p>Play.<br>Learn.<br>Grow!</p>"
     },
     {
       "type": "select",
@@ -303,7 +318,7 @@
       "type": "richtext",
       "id": "description",
       "label": "Description",
-      "default": "<p>Shop our newest arrivals and exclusive designs</p>"
+      "default": "<p>Premium toys that inspire creativity, ignite imagination and help your child <strong>grow every day.</strong></p>"
     },
     {
       "type": "select",
@@ -333,7 +348,7 @@
       "type": "text",
       "id": "button_label_1",
       "label": "Button Text",
-      "default": "Shop Now"
+      "default": "Shop by Age"
     },
     {
       "type": "url",
@@ -354,7 +369,7 @@
       "type": "text",
       "id": "button_label_2",
       "label": "Button Text",
-      "default": "Learn More"
+      "default": "Explore Toys"
     },
     {
       "type": "url",
@@ -412,7 +427,7 @@
           "label": "Bottom Right"
         }
       ],
-      "default": "middle-center",
+      "default": "middle-left",
       "label": "Desktop Content Position"
     },
     {
@@ -432,13 +447,13 @@
           "label": "Right"
         }
       ],
-      "default": "center",
+      "default": "left",
       "label": "Desktop Content Alignment"
     },
     {
       "type": "checkbox",
       "id": "show_text_box",
-      "default": true,
+      "default": false,
       "label": "Show Text Box Background"
     },
     {
@@ -516,7 +531,21 @@
   ],
   "presets": [
     {
-      "name": "Featured Hero CTA"
+      "name": "Featured Hero CTA",
+      "settings": {
+        "image_height": "large",
+        "heading_desktop": "<p>Play.<br>Learn.<br>Grow!</p>",
+        "heading_mobile": "<p>Play.<br>Learn.<br>Grow!</p>",
+        "heading_size": "h1",
+        "description": "<p>Premium toys that inspire creativity, ignite imagination and help your child <strong>grow every day.</strong></p>",
+        "button_label_1": "Shop by Age",
+        "button_style_secondary_1": false,
+        "button_label_2": "Explore Toys",
+        "button_style_secondary_2": true,
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false
+      }
     }
   ]
 }

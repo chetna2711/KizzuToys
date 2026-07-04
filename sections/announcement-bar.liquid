@@ -18,9 +18,90 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
+<style>
+  .utility-bar {
+    background: linear-gradient(90deg, #008f86, #08a59b);
+    color: #ffffff;
+    min-height: 2.6rem;
+  }
+
+  .utility-bar .utility-bar__grid {
+    display: none;
+  }
+
+  .kizzu-topbar {
+    min-height: 2.6rem;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    align-items: center;
+    gap: 3.2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+
+  .kizzu-topbar__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .kizzu-topbar__icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    color: #ffc53d;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .kizzu-topbar__icon .icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .kizzu-topbar strong {
+    color: #ffc53d;
+    font-weight: 900;
+  }
+
+  @media screen and (max-width: 989px) {
+    .kizzu-topbar {
+      display: flex;
+      overflow-x: auto;
+      gap: 2rem;
+      padding-top: 0.7rem;
+      padding-bottom: 0.7rem;
+      scrollbar-width: none;
+    }
+
+    .kizzu-topbar::-webkit-scrollbar {
+      display: none;
+    }
+  }
+</style>
+
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
+  <div class="kizzu-topbar page-width">
+    <div class="kizzu-topbar__item">
+     
+      <span>Free Shipping on Orders Above &#8377;999</span>
+    </div>
+   
+    <div class="kizzu-topbar__item">
+      <span class="kizzu-topbar__icon" aria-hidden="true">&#9742;</span>
+      <span>+91 9426862783  </span>
+    </div>
+    <div class="kizzu-topbar__item">
+      <span class="kizzu-topbar__icon" aria-hidden="true">&#9993;</span>
+      <span>kizzutoys1@gmail.com</span>
+    </div>
+  </div>
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}

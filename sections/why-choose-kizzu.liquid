@@ -1,0 +1,285 @@
+{{ 'why-choose-kizzu.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="why-kizzu section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="why-kizzu__wrap page-width">
+    <div class="why-kizzu__header">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="why-kizzu__badge">
+          <svg aria-hidden="true" viewBox="0 0 20 20">
+            <path d="M10 17.5 8.7 16.3C4.3 12.3 1.5 9.8 1.5 6.7 1.5 4.2 3.5 2.2 6 2.2c1.4 0 2.8.7 3.7 1.8.9-1.1 2.3-1.8 3.7-1.8 2.5 0 4.6 2 4.6 4.5 0 3.1-2.8 5.6-7.2 9.6L10 17.5Z"/>
+          </svg>
+          <span>{{ section.settings.badge_text }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="why-kizzu__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="why-kizzu__description rte">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="why-kizzu__grid" data-why-kizzu-slider>
+        {%- for block in section.blocks -%}
+          <div class="why-kizzu-card" {{ block.shopify_attributes }}>
+            <div class="why-kizzu-card__icon">
+              {%- case block.settings.icon -%}
+                {%- when 'shield' -%}
+                  <svg aria-hidden="true" viewBox="0 0 64 64">
+                    <path d="M32 6 12 14v15c0 14.5 8.6 23.8 20 29 11.4-5.2 20-14.5 20-29V14L32 6Z"/>
+                    <path d="m23.5 32.5 5.5 5.5 12-14"/>
+                  </svg>
+                {%- when 'brain' -%}
+                  <svg aria-hidden="true" viewBox="0 0 64 64">
+                    <path d="M25 11c-6 0-10 4.2-10 9.7-4.1 1.5-7 5.4-7 10 0 4.4 2.6 8.2 6.4 9.8A10.2 10.2 0 0 0 25 53"/>
+                    <path d="M39 11c6 0 10 4.2 10 9.7 4.1 1.5 7 5.4 7 10 0 4.4-2.6 8.2-6.4 9.8A10.2 10.2 0 0 1 39 53"/>
+                    <path d="M25 11v42M39 11v42M25 24h-6M25 36h-7M39 24h6M39 36h7M25 31h14"/>
+                  </svg>
+                {%- when 'award' -%}
+                  <svg aria-hidden="true" viewBox="0 0 64 64">
+                    <path d="M32 8 37 14l8-1 2 8 7 4-4 7 4 7-7 4-2 8-8-1-5 6-5-6-8 1-2-8-7-4 4-7-4-7 7-4 2-8 8 1 5-6Z"/>
+                    <path d="m32 22 3.2 6.4 7.1 1-5.1 5 1.2 7-6.4-3.4-6.4 3.4 1.2-7-5.1-5 7.1-1L32 22Z"/>
+                  </svg>
+                {%- when 'truck' -%}
+                  <svg aria-hidden="true" viewBox="0 0 64 64">
+                    <path d="M7 17h34v27H7zM41 27h9l7 8v9H41z"/>
+                    <path d="M17 50a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM48 50a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM14 27H6"/>
+                  </svg>
+                {%- else -%}
+                  <svg aria-hidden="true" viewBox="0 0 64 64">
+                    <path d="M14 25a20 20 0 1 1 2.5 19.3"/>
+                    <path d="M14 25H6V17"/>
+                  </svg>
+              {%- endcase -%}
+            </div>
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="why-kizzu-card__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <div class="why-kizzu-card__text rte">
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (() => {
+    const initWhyKizzuSlider = (root = document) => {
+      root.querySelectorAll('[data-why-kizzu-slider]').forEach((slider) => {
+        if (slider.dataset.sliderReady === 'true') return;
+
+        const cards = Array.from(slider.querySelectorAll('.why-kizzu-card'));
+        if (cards.length < 2) return;
+
+        let index = 0;
+        let timer;
+        const mobileQuery = window.matchMedia('(max-width: 749px)');
+
+        const goToCard = () => {
+          if (!mobileQuery.matches) return;
+          index = (index + 1) % cards.length;
+          slider.scrollTo({
+            left: cards[index].offsetLeft - slider.offsetLeft,
+            behavior: 'smooth'
+          });
+        };
+
+        const start = () => {
+          window.clearInterval(timer);
+          if (mobileQuery.matches) timer = window.setInterval(goToCard, 2800);
+        };
+
+        const stop = () => window.clearInterval(timer);
+
+        slider.dataset.sliderReady = 'true';
+        slider.addEventListener('mouseenter', stop);
+        slider.addEventListener('mouseleave', start);
+        slider.addEventListener('touchstart', stop, { passive: true });
+        slider.addEventListener('touchend', start, { passive: true });
+        mobileQuery.addEventListener('change', start);
+        start();
+      });
+    };
+
+    initWhyKizzuSlider();
+    document.addEventListener('shopify:section:load', (event) => initWhyKizzuSlider(event.target));
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Why Choose Kizzu",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "WHY CHOOSE KIZZU"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Thoughtfully Chosen for Little Ones"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>We bring you toys that are safe, meaningful and made to make every moment count.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 92
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "brain",
+              "label": "Brain"
+            },
+            {
+              "value": "award",
+              "label": "Award"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Safe & Non-Toxic"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Made with child-safe, non-toxic materials for worry-free play.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Kizzu",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Safe & Non-Toxic",
+            "text": "<p>Made with child-safe, non-toxic materials for worry-free play.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "brain",
+            "title": "Learning Through Play",
+            "text": "<p>Toys that spark curiosity and build essential skills naturally.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "award",
+            "title": "Premium Quality",
+            "text": "<p>Durable, well-crafted toys made to last and be loved.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast & Reliable Delivery",
+            "text": "<p>Quick processing and safe delivery across India.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "return",
+            "title": "Hassle-Free Returns",
+            "text": "<p>Easy returns within 7 days for a smooth experience.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

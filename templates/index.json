@@ -15,24 +15,24 @@
       "settings": {
         "image_desktop": "shopify://shop_images/1ac99729-ed18-4304-ba3d-c79838bea37c.png",
         "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "image_height": "large",
         "image_behavior": "none",
-        "badge_text": "New Collection",
+        "badge_text": "NEW COLLECTION",
         "badge_style": "primary",
-        "heading_desktop": "<p>Discover Our Latest Collection</p>",
-        "heading_mobile": "<p>New Collection</p>",
+        "heading_desktop": "<p>Play.<br>Learn.<br>Grow!</p>",
+        "heading_mobile": "<p>Play.<br>Learn.<br>Grow!</p>",
         "heading_size": "h1",
-        "description": "<p>Shop our newest arrivals and exclusive designs</p>",
+        "description": "<p>Premium toys that inspire creativity, ignite imagination and help your child <strong>grow every day.</strong></p>",
         "text_style": "body",
-        "button_label_1": "Shop Now",
+        "button_label_1": "Shop by Age",
         "button_link_1": "",
         "button_style_secondary_1": false,
-        "button_label_2": "Learn More",
+        "button_label_2": "Explore Toys",
         "button_link_2": "",
         "button_style_secondary_2": true,
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
         "color_scheme": "",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
@@ -41,9 +41,162 @@
         "padding_bottom": 36,
         "section_color_scheme": ""
       }
+    },
+    "featured_collection_cards_categories": {
+      "type": "featured-collection-cards",
+      "name": "Featured Collection Cards",
+      "settings": {
+        "badge_text": "SHOP BY CATEGORY",
+        "badge_style": "primary",
+        "heading": "Shop by Category",
+        "heading_size": "h1",
+        "description": "<p>Explore our wide range of toys designed to educate, engage and inspire.</p>",
+        "section_color_scheme": "scheme-3",
+        "padding_top": 72,
+        "padding_bottom": 48
+      },
+      "blocks": {
+        "card_stem_toys": {
+          "type": "card",
+          "settings": {
+            "title": "STEM Toys",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        },
+        "card_montessori_toys": {
+          "type": "card",
+          "settings": {
+            "title": "Montessori Toys",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        },
+        "card_wooden_toys": {
+          "type": "card",
+          "settings": {
+            "title": "Wooden Toys",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        },
+        "card_puzzles": {
+          "type": "card",
+          "settings": {
+            "title": "Puzzles",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        },
+        "card_art_craft": {
+          "type": "card",
+          "settings": {
+            "title": "Art & Craft",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        },
+        "card_pretend_play": {
+          "type": "card",
+          "settings": {
+            "title": "Pretend Play",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        },
+        "card_science_kits": {
+          "type": "card",
+          "settings": {
+            "title": "Science Kits",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        },
+        "card_brain_games": {
+          "type": "card",
+          "settings": {
+            "title": "Brain Games",
+            "button_label": "Shop Now",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_stem_toys",
+        "card_montessori_toys",
+        "card_wooden_toys",
+        "card_puzzles",
+        "card_art_craft",
+        "card_pretend_play",
+        "card_science_kits",
+        "card_brain_games"
+      ]
+    },
+    "why_choose_kizzu": {
+      "type": "why-choose-kizzu",
+      "name": "Why Choose Kizzu",
+      "settings": {
+        "badge_text": "WHY CHOOSE KIZZU",
+        "heading": "Thoughtfully Chosen for Little Ones",
+        "description": "<p>We bring you toys that are safe, meaningful and made to make every moment count.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 76,
+        "padding_bottom": 92
+      },
+      "blocks": {
+        "safe_non_toxic": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Safe & Non-Toxic",
+            "text": "<p>Made with child-safe, non-toxic materials for worry-free play.</p>"
+          }
+        },
+        "learning_play": {
+          "type": "feature",
+          "settings": {
+            "icon": "brain",
+            "title": "Learning Through Play",
+            "text": "<p>Toys that spark curiosity and build essential skills naturally.</p>"
+          }
+        },
+        "premium_quality": {
+          "type": "feature",
+          "settings": {
+            "icon": "award",
+            "title": "Premium Quality",
+            "text": "<p>Durable, well-crafted toys made to last and be loved.</p>"
+          }
+        },
+        "fast_delivery": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast & Reliable Delivery",
+            "text": "<p>Quick processing and safe delivery across India.</p>"
+          }
+        },
+        "returns": {
+          "type": "feature",
+          "settings": {
+            "icon": "return",
+            "title": "Hassle-Free Returns",
+            "text": "<p>Easy returns within 7 days for a smooth experience.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "safe_non_toxic",
+        "learning_play",
+        "premium_quality",
+        "fast_delivery",
+        "returns"
+      ]
     }
   },
   "order": [
-    "featured_hero_cta_YBrKyY"
+    "featured_hero_cta_YBrKyY",
+    "featured_collection_cards_categories",
+    "why_choose_kizzu"
   ]
 }
