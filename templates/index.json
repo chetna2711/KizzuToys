@@ -133,6 +133,20 @@
         "padding_bottom": 48
       }
     },
+    "best_seller_product_slider_rrzeWc": {
+      "type": "best-seller-product-slider",
+      "name": "Collection Products Slider",
+      "settings": {
+        "heading": "Best Sellers",
+        "description": "Discover our most loved toys by parents and kids",
+        "collection": "musical-toys",
+        "product_count": 10,
+        "card_button_text": "SHOP NOW",
+        "show_price": false,
+        "bottom_button_text": "VIEW ALL",
+        "bottom_button_url": ""
+      }
+    },
     "why_choose_kizzu": {
       "type": "why-choose-kizzu",
       "blocks": {
@@ -198,6 +212,7 @@
   "order": [
     "featured_hero_cta_YBrKyY",
     "featured_collection_cards_categories",
+    "best_seller_product_slider_rrzeWc",
     "why_choose_kizzu"
   ]
 }
