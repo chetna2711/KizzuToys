@@ -204,8 +204,8 @@
         "heading": "Thoughtfully Chosen for Little Ones",
         "description": "<p>We bring you toys that are safe, meaningful and made to make every moment count.</p>",
         "color_scheme": "scheme-1",
-        "padding_top": 76,
-        "padding_bottom": 92
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     }
   },
