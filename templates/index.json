@@ -26,10 +26,10 @@
         "description": "<p>Premium toys that inspire creativity, ignite imagination and help your child <strong>grow every day.</strong></p>",
         "text_style": "body",
         "button_label_1": "Shop by Age",
-        "button_link_1": "",
+        "button_link_1": "shopify://collections/musical-toys",
         "button_style_secondary_1": false,
         "button_label_2": "Explore Toys",
-        "button_link_2": "",
+        "button_link_2": "shopify://collections",
         "button_style_secondary_2": true,
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
@@ -52,7 +52,7 @@
             "image": "shopify://shop_images/c3.png",
             "title": "STEM Toys",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/die-cast-model"
           }
         },
         "card_montessori_toys": {
@@ -61,7 +61,7 @@
             "image": "shopify://shop_images/c5.png",
             "title": "Montessori Toys",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/rc-car"
           }
         },
         "card_wooden_toys": {
@@ -70,7 +70,7 @@
             "image": "shopify://shop_images/c4.png",
             "title": "Wooden Toys",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/role-play-toys"
           }
         },
         "card_puzzles": {
@@ -79,7 +79,7 @@
             "image": "shopify://shop_images/2_1fe28606-e561-4bc3-9582-5887f4220f32.jpg",
             "title": "Puzzles",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/rc-car"
           }
         },
         "card_art_craft": {
@@ -88,7 +88,7 @@
             "image": "shopify://shop_images/c6.png",
             "title": "Art & Craft",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/role-play-toys"
           }
         },
         "card_pretend_play": {
@@ -97,7 +97,7 @@
             "image": "shopify://shop_images/c1.png",
             "title": "Pretend Play",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/musical-toys"
           }
         },
         "card_science_kits": {
@@ -106,7 +106,7 @@
             "image": "shopify://shop_images/6_63246183-932f-4c39-85f1-1c691cb32b2d.jpg",
             "title": "Science Kits",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/games"
           }
         },
         "card_brain_games": {
@@ -115,7 +115,7 @@
             "image": "shopify://shop_images/c2.png",
             "title": "Brain Games",
             "button_label": "Shop Now",
-            "button_url": ""
+            "button_url": "shopify://collections/educational-toys"
           }
         }
       },
