@@ -123,14 +123,14 @@
       ],
       "name": "Featured Collection Cards",
       "settings": {
-        "badge_text": "SHOP BY CATEGORY",
+        "badge_text": "Choose Your Fun",
         "badge_style": "primary",
         "heading": "Shop by Category",
         "heading_size": "h1",
         "description": "<p>Explore our wide range of toys designed to educate, engage and inspire.</p>",
         "section_color_scheme": "scheme-3",
-        "padding_top": 72,
-        "padding_bottom": 48
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "best_seller_product_slider_rrzeWc": {
