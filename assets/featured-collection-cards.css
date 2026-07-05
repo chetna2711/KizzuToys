@@ -37,23 +37,23 @@
 }
 
 .featured-collection-cards__heading.h1 {
-  font-size: clamp(3.6rem, 3.4vw, 5.2rem);
+  font-size: 36px;
 }
 
 .featured-collection-cards__heading.h2 {
-  font-size: 3.2rem;
+  font-size: 36px;
 }
 
 .featured-collection-cards__heading.h3 {
-  font-size: 1.5rem;
+  font-size: 36px;
 }
 
 .featured-collection-cards__heading.h4 {
-  font-size: 1.25rem;
+  font-size: 36px;
 }
 
 .featured-collection-cards__description {
-  font-size: 1.65rem;
+  font-size: 16px;
   line-height: 1.45;
   color: #172142;
   max-width: 78rem;
@@ -210,7 +210,7 @@
   border-radius: 999px;
   background: #ffffff;
   box-shadow: 0 0.4rem 1.4rem rgba(8, 20, 40, 0.08);
-  font-size: 1.25rem;
+  font-size: 14px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0;
@@ -266,15 +266,26 @@
   }
 
   .featured-collection-cards__heading.h1 {
-    font-size: 2.8rem;
+    font-size: 28px;
   }
 
   .featured-collection-cards__heading.h2 {
-    font-size: 2.4rem;
+    font-size: 28px;
+  }
+
+  .featured-collection-cards__heading.h3,
+  .featured-collection-cards__heading.h4 {
+    font-size: 28px;
   }
 
   .featured-collection-cards__description {
-    font-size: 1.35rem;
+    font-size: 14px;
+  }
+
+  .badge {
+    min-height: 3.4rem;
+    padding: 0.7rem 1.8rem;
+    font-size: 12px;
   }
 
   .featured-collection-cards__grid {

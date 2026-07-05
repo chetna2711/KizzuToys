@@ -146,11 +146,12 @@
       "name": "Collection Products Slider",
       "settings": {
         "heading": "Best Sellers",
+        "badge_text": "Best Sellers",
         "description": "Discover our most loved toys by parents and kids",
         "collection": "musical-toys",
         "product_count": 10,
-        "card_button_text": "SHOP NOW",
-        "show_price": false,
+        "card_button_text": "ADD TO CART",
+        "show_price": true,
         "bottom_button_text": "VIEW ALL",
         "bottom_button_url": ""
       }
@@ -216,6 +217,80 @@
         "padding_bottom": 40
       }
     },
+    "kizzu_faq": {
+      "type": "kizzu-faq",
+      "blocks": {
+        "faq_safe": {
+          "type": "faq",
+          "settings": {
+            "icon": "shield",
+            "question": "Are Kizzu toys safe for my child?",
+            "answer": "<p>Yes! All Kizzu toys are made from child-safe, non-toxic materials and meet international safety standards, ensuring worry-free play.</p>"
+          }
+        },
+        "faq_age": {
+          "type": "faq",
+          "settings": {
+            "icon": "age",
+            "question": "What age group are Kizzu toys suitable for?",
+            "answer": "<p>Our collection includes toys for babies, toddlers and growing kids. Check each product page for the recommended age range.</p>"
+          }
+        },
+        "faq_clean": {
+          "type": "faq",
+          "settings": {
+            "icon": "leaf",
+            "question": "How do I clean and maintain the toys?",
+            "answer": "<p>Wipe toys gently with a clean damp cloth and let them air dry. Avoid harsh chemicals or soaking wooden toys in water.</p>"
+          }
+        },
+        "faq_cod": {
+          "type": "faq",
+          "settings": {
+            "icon": "box",
+            "question": "Do you offer Cash on Delivery (COD)?",
+            "answer": "<p>Yes, Cash on Delivery is available on eligible orders and locations during checkout.</p>"
+          }
+        },
+        "faq_return": {
+          "type": "faq",
+          "settings": {
+            "icon": "return",
+            "question": "What is your return and exchange policy?",
+            "answer": "<p>We offer easy returns and exchanges on eligible products. Please keep the item unused with its original packaging.</p>"
+          }
+        },
+        "faq_shipping": {
+          "type": "faq",
+          "settings": {
+            "icon": "truck",
+            "question": "How long does shipping take?",
+            "answer": "<p>Most orders are processed quickly and delivered within a few business days, depending on your location.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_safe",
+        "faq_age",
+        "faq_clean",
+        "faq_cod",
+        "faq_return",
+        "faq_shipping"
+      ],
+      "name": "Kizzu FAQ",
+      "settings": {
+        "badge_text": "FAQS",
+        "heading": "Frequently Asked Questions",
+        "subheading": "Everything you need to know about Kizzu Toys",
+        "open_first_item": true,
+        "image": "shopify://shop_images/c5.png",
+        "image_alt": "Wooden learning toys in a playroom",
+        "contact_heading": "Still have questions?",
+        "contact_text": "We're here to help!",
+        "email": "hello@kizzu.toys",
+        "whatsapp": "+91 98765 43210"
+      }
+    },
     "blocks_XYW3Dq": {
       "type": "_blocks",
       "blocks": {
@@ -223,6 +298,7 @@
           "type": "ai_gen_block_41f5fdc",
           "settings": {
             "heading": "What our customers say",
+            "badge_text": "Testimonials",
             "subheading": "Real reviews from real customers",
             "heading_alignment": "center",
             "heading_size": 36,
@@ -238,8 +314,8 @@
             "star_color": "#e3fc02",
             "star_empty_color": "#d1d1d1",
             "avatar_background": "#e0e0e0",
-            "nav_button_color": "#1f1f21",
-            "nav_button_hover_color": "#e3fc02",
+            "nav_button_color": "#008f86",
+            "nav_button_hover_color": "#006f69",
             "nav_icon_color": "#ffffff",
             "dot_color": "#d1d1d1",
             "dot_active_color": "#1f1f21",
@@ -292,6 +368,7 @@
     "featured_collection_cards_categories",
     "best_seller_product_slider_rrzeWc",
     "why_choose_kizzu",
+    "kizzu_faq",
     "blocks_XYW3Dq"
   ]
 }

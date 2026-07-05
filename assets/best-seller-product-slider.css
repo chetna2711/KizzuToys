@@ -1,31 +1,70 @@
 .cps {
-  padding: 40px 0;
-  background: #ffffff;
+  padding: 44px 0 52px;
+  background: #fffaf3;
 }
 
 .cps__container {
   max-width: 1680px;
   margin: 0 auto;
-  padding: 0 56px;
+  padding: 0 86px;
 }
 
 .cps__header {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 44px;
+}
+
+.cps__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 38px;
+  padding: 8px 22px;
+  margin-bottom: 18px;
+  border: 1px solid #e5e9eb;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #008f86;
+  box-shadow: 0 4px 14px rgba(8, 20, 40, 0.08);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.cps__badge svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
 }
 
 .cps__header h2 {
-  margin: 0 0 10px;
-  font-size: 34px;
+  position: relative;
+  margin: 0 0 18px;
+  font-size: 36px;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 900;
   color: #111936;
+  letter-spacing: 0;
+}
+
+.cps__header h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  background: #008f86;
+  transform: translateX(-50%);
 }
 
 .cps__header p {
   margin: 0;
   font-size: 16px;
   color: #111936;
+  letter-spacing: 0;
 }
 
 .cps__slider-wrap {
@@ -35,8 +74,8 @@
 .cps__slider {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc((100% - 72px) / 5);
-  column-gap: 18px;
+  grid-auto-columns: calc((100% - 80px) / 5);
+  column-gap: 20px;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -53,20 +92,28 @@
 
 .cps-card {
   height: 100%;
-  min-height: 385px;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 10px;
   background: #ffffff;
-  border: 1px solid #eeeeee;
+  border: 1px solid #eee9e1;
   border-radius: 10px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 18px rgba(8, 20, 40, 0.08);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cps-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(8, 20, 40, 0.12);
 }
 
 .cps-card__image {
   display: block;
   width: 100%;
-  aspect-ratio: 1.36 / 1;
+  aspect-ratio: 1.08 / 1;
   border-radius: 8px;
   overflow: hidden;
   background: #fbf4ea;
@@ -77,23 +124,29 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.cps-card:hover .cps-card__image img {
+  transform: scale(1.03);
 }
 
 .cps-card__content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 12px;
+  padding: 15px 9px 8px;
 }
 
 .cps-card__title {
-  min-height: 48px;
-  margin: 0 0 10px;
-  font-size: 18px;
+  min-height: 52px;
+  margin: 0 0 12px;
+  font-size: 17px;
   line-height: 1.35;
-  font-weight: 800;
+  font-weight: 900;
   color: #06152f;
   text-decoration: none;
+  letter-spacing: 0;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -102,32 +155,49 @@
 }
 
 .cps-card__price {
-  margin: 0 0 12px;
-  font-size: 17px;
-  font-weight: 800;
+  margin: 0 0 20px;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 900;
   color: #06152f;
-}
-
-.cps-card__form {
-  margin-top: auto;
+  letter-spacing: 0;
 }
 
 .cps-card__button {
-  width: 142px;
-  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
   border: 0;
-  border-radius: 0;
-  background: #008f86;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #069c92, #007d76);
   color: #ffffff;
   font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 10px rgba(0, 125, 118, 0.28);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.cps-card__button svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  fill: currentColor;
 }
 
 .cps-card__button:hover {
-  background: #007d76;
+  background: linear-gradient(180deg, #008f86, #006f69);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 125, 118, 0.34);
 }
 
 .cps-card__button:disabled {
@@ -137,48 +207,65 @@
 
 .cps__arrow {
   position: absolute;
-  top: 45%;
+  top: 44%;
   transform: translateY(-50%);
   z-index: 3;
-  width: 38px;
-  height: 38px;
+  width: 46px;
+  height: 46px;
   border: 0;
   border-radius: 50%;
   background: #008f86;
   color: #ffffff;
-  font-size: 32px;
-  line-height: 34px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
 }
 
+.cps__arrow[hidden] {
+  display: none;
+}
+
+.cps__arrow svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
 .cps__arrow--prev {
-  left: -48px;
+  left: -62px;
 }
 
 .cps__arrow--next {
-  right: -48px;
+  right: -62px;
 }
 
 .cps__bottom {
   text-align: center;
-  margin-top: 24px;
+  margin-top: 28px;
 }
 
 .cps__bottom-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 220px;
-  height: 50px;
-  padding: 0 24px;
+  min-width: 300px;
+  min-height: 64px;
+  padding: 0 30px;
   border: 1.5px solid #008f86;
   border-radius: 8px;
   color: #008f86;
   background: transparent;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.cps__bottom-btn::after {
+  content: "\2192";
+  margin-left: 12px;
+  font-size: 20px;
+  line-height: 1;
 }
 
 .cps__bottom-btn:hover {
@@ -198,7 +285,11 @@
   }
 
   .cps__slider {
-    grid-auto-columns: calc((100% - 36px) / 3);
+    grid-auto-columns: calc((100% - 60px) / 4);
+  }
+
+  .cps-card {
+    min-height: 300px;
   }
 
   .cps__arrow--prev {
@@ -212,7 +303,7 @@
 
 @media screen and (max-width: 749px) {
   .cps {
-    padding: 28px 0;
+    padding: 32px 0 40px;
   }
 
   .cps__container {
@@ -231,6 +322,12 @@
     font-size: 14px;
   }
 
+  .cps__badge {
+    min-height: 34px;
+    padding: 7px 18px;
+    font-size: 12px;
+  }
+
   .cps__slider {
     grid-auto-columns: 100%;
     column-gap: 14px;
@@ -242,7 +339,7 @@
   }
 
   .cps-card {
-    min-height: 390px;
+    min-height: 420px;
   }
 
   .cps-card__title {
@@ -250,22 +347,28 @@
   }
 
   .cps-card__button {
-    width: 140px;
-    height: 50px;
+    min-height: 44px;
     font-size: 12px;
   }
 
   .cps__arrow {
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     font-size: 28px;
+    line-height: 34px;
   }
 
   .cps__arrow--prev {
-    left: 4px;
+    left: 0;
   }
 
   .cps__arrow--next {
-    right: 4px;
+    right: 0;
+  }
+
+  .cps__bottom-btn {
+    min-width: 0;
+    width: 100%;
+    min-height: 54px;
   }
 }

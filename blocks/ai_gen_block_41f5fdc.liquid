@@ -18,14 +18,39 @@
     margin-bottom: 40px;
   }
 
+  .ai-reviews-carousel__badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 38px;
+    padding: 8px 22px;
+    margin-bottom: 18px;
+    border: 1px solid #e5e9eb;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #008f86;
+    box-shadow: 0 4px 14px rgba(8, 20, 40, 0.08);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .ai-reviews-carousel__badge-{{ ai_gen_id }} svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
   .ai-reviews-carousel__heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
+    font-size: 36px;
     color: {{ block.settings.heading_color }};
     margin: 0 0 10px;
+    font-weight: 900;
   }
 
   .ai-reviews-carousel__subheading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.subheading_size }}px;
+    font-size: 16px;
     color: {{ block.settings.text_color }};
     margin: 0;
   }
@@ -211,6 +236,20 @@
       width: 35px;
       height: 35px;
     }
+
+    .ai-reviews-carousel__badge-{{ ai_gen_id }} {
+      min-height: 34px;
+      padding: 7px 18px;
+      font-size: 12px;
+    }
+
+    .ai-reviews-carousel__heading-{{ ai_gen_id }} {
+      font-size: 28px;
+    }
+
+    .ai-reviews-carousel__subheading-{{ ai_gen_id }} {
+      font-size: 14px;
+    }
   }
 {% endstyle %}
 
@@ -220,6 +259,14 @@
 >
   {% if block.settings.heading != blank or block.settings.subheading != blank %}
     <div class="ai-reviews-carousel__header-{{ ai_gen_id }}">
+      {% if block.settings.badge_text != blank %}
+        <div class="ai-reviews-carousel__badge-{{ ai_gen_id }}">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+            <path d="M12 2 14.6 8.2 21.3 8.8 16.2 13.2 17.7 19.8 12 16.3 6.3 19.8 7.8 13.2 2.7 8.8 9.4 8.2 12 2Z"/>
+          </svg>
+          <span>{{ block.settings.badge_text }}</span>
+        </div>
+      {% endif %}
       {% if block.settings.heading != blank %}
         <h2 class="ai-reviews-carousel__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
       {% endif %}
@@ -435,6 +482,12 @@
       "content": "Heading"
     },
     {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Testimonials"
+    },
+    {
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
@@ -600,13 +653,13 @@
       "type": "color",
       "id": "nav_button_color",
       "label": "Button background",
-      "default": "#1f1f21"
+      "default": "#008f86"
     },
     {
       "type": "color",
       "id": "nav_button_hover_color",
       "label": "Button hover background",
-      "default": "#e3fc02"
+      "default": "#006f69"
     },
     {
       "type": "color",

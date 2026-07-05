@@ -1,0 +1,277 @@
+{{ 'kizzu-faq.css' | asset_url | stylesheet_tag }}
+
+<section class="kizzu-faq section-{{ section.id }}">
+  <div class="kizzu-faq__container">
+    <div class="kizzu-faq__decor kizzu-faq__decor--left" aria-hidden="true">
+      <svg viewBox="0 0 120 90" focusable="false">
+        <path d="M9 82C-2 38 35 49 58 48c26-1 25-22 25-22" />
+        <path d="m87 3 7 16 17 1-13 11 4 17-15-9-15 9 4-17-13-11 17-1z" />
+      </svg>
+    </div>
+    <div class="kizzu-faq__decor kizzu-faq__decor--right" aria-hidden="true">
+      <svg viewBox="0 0 130 90" focusable="false">
+        <path d="M7 82c15-44 46-27 61-10 15 16 43 13 54-17" />
+        <path d="M105 8c9-14 30 2 17 20l-17 20-17-20C75 10 96-6 105 8z" />
+      </svg>
+    </div>
+
+    {% if section.settings.badge_text != blank %}
+      <div class="kizzu-faq__badge">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+          <path d="M12 3.5c-5 0-9 3.4-9 7.7 0 2.5 1.4 4.8 3.7 6.2l-.7 3.1 3.4-1.6c.8.2 1.7.3 2.6.3 5 0 9-3.4 9-7.7S17 3.5 12 3.5Zm0 1.8c4 0 7.2 2.7 7.2 6s-3.2 6-7.2 6c-.9 0-1.7-.1-2.5-.4l-.3-.1-1.1.5.2-1.1-.6-.4c-1.9-1.1-2.9-2.8-2.9-4.6 0-3.2 3.2-5.9 7.2-5.9Zm-2.8 4.2c.1-1.6 1.2-2.7 2.9-2.7 1.8 0 3 1.1 3 2.6 0 1-.5 1.7-1.4 2.3-.6.4-.8.7-.8 1.3v.4h-1.7v-.5c0-1 .4-1.5 1.2-2 .7-.5 1-.9 1-1.4 0-.7-.5-1.1-1.3-1.1-.7 0-1.2.4-1.3 1.2H9.2Zm1.8 5.8c0-.6.4-1 1-1s1 .4 1 1-.4 1-1 1-1-.4-1-1Z" />
+        </svg>
+        <span>{{ section.settings.badge_text }}</span>
+      </div>
+    {% endif %}
+
+    <div class="kizzu-faq__header">
+      {% if section.settings.heading != blank %}
+        <h2>{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="kizzu-faq__main">
+      <div class="kizzu-faq__items">
+        {% for block in section.blocks %}
+          {% if block.type == 'faq' %}
+            <details
+              class="kizzu-faq__item"
+              {% if forloop.first and section.settings.open_first_item %}open{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <summary class="kizzu-faq__question">
+                <span class="kizzu-faq__icon kizzu-faq__icon--{{ block.settings.icon }}">
+                  {% case block.settings.icon %}
+                    {% when 'shield' %}
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 2.5 5 5.2v5.6c0 4.5 2.8 8.6 7 10.2 4.2-1.6 7-5.7 7-10.2V5.2L12 2.5Zm0 2.1 5 1.9v4.3c0 3.5-1.9 6.7-5 8.1-3.1-1.4-5-4.6-5-8.1V6.5l5-1.9Zm3.2 4.5-4.1 4.1-2-2-1.3 1.3 3.3 3.3 5.4-5.4-1.3-1.3Z" /></svg>
+                    {% when 'age' %}
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 3a3.5 3.5 0 0 1 2 6.4V12h2.5a3.5 3.5 0 1 1-1.4 1.8H8.9A3.5 3.5 0 1 1 7.5 12H10V9.4A3.5 3.5 0 0 1 12 3Zm0 1.8a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4ZM5.5 13.7a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm13 0a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Z" /></svg>
+                    {% when 'leaf' %}
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20.8 3.2C12.1 3.5 6 8.8 6 15.6c0 .7.1 1.3.3 1.9l-3 3 1.2 1.2 3-3c.9.5 2 .8 3.2.8 6.9 0 10.1-7.2 10.1-16.3ZM10.7 17.7c-.7 0-1.4-.2-2-.5l6.7-6.7-1.2-1.2-6.6 6.6v-.3c0-5.3 4.5-9.5 11.3-10.4-.5 6.8-3.2 12.5-8.2 12.5Z" /></svg>
+                    {% when 'box' %}
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m12 2.8 8 3.7v10.9l-8 3.8-8-3.8V6.5l8-3.7Zm0 2L7.1 7.1 12 9.4l4.9-2.3L12 4.8ZM5.8 8.5v7.8l5.3 2.5V11L5.8 8.5Zm12.4 0L12.9 11v7.8l5.3-2.5V8.5Z" /></svg>
+                    {% when 'return' %}
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M7.1 7.8A8 8 0 0 1 20 14.1h-1.9A6.1 6.1 0 0 0 8.4 9L11 11.6H4.5V5.1l2.6 2.7Zm9.8 8.4A8 8 0 0 1 4 9.9h1.9a6.1 6.1 0 0 0 9.7 5.1L13 12.4h6.5v6.5l-2.6-2.7Z" /></svg>
+                    {% else %}
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M3 5h12v9h2.5l2.5 2.7V19h-2.1a2.8 2.8 0 0 1-5.4 0h-4a2.8 2.8 0 0 1-5.4 0H3V5Zm2 2v8.2h10V7H5Zm12 4v4.2h1.8L17 13.3V11Zm-11.2 7a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Zm9.4 0a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Z" /></svg>
+                  {% endcase %}
+                </span>
+                <span class="kizzu-faq__question-text">{{ block.settings.question }}</span>
+                <span class="kizzu-faq__chevron" aria-hidden="true"></span>
+              </summary>
+              {% if block.settings.answer != blank %}
+                <div class="kizzu-faq__answer">
+                  {{ block.settings.answer }}
+                </div>
+              {% endif %}
+            </details>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="kizzu-faq__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1100
+            | image_tag: loading: 'lazy', alt: section.settings.image_alt
+          }}
+        {% else %}
+          <div class="kizzu-faq__placeholder" aria-label="{{ section.settings.image_alt | escape }}">
+            <div class="kizzu-faq__poster">PLAY<br>LEARN<br>GROW</div>
+            <div class="kizzu-faq__stack">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="kizzu-faq__cube">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="kizzu-faq__elephant"></div>
+            <div class="kizzu-faq__star-toy"></div>
+            <div class="kizzu-faq__block-toy"></div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="kizzu-faq__contact">
+      <div class="kizzu-faq__contact-intro">
+        <span class="kizzu-faq__contact-icon">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 3a8 8 0 0 0-8 8v4.5A2.5 2.5 0 0 0 6.5 18H8v-7H5.9a6.1 6.1 0 0 1 12.2 0H16v7h2.1a4.6 4.6 0 0 1-4.2 2.8h-1.1a1.7 1.7 0 1 0 0 1.7h1.1A6.3 6.3 0 0 0 20.2 18a2.5 2.5 0 0 0 1.8-2.4V11a8 8 0 0 0-8-8h-2Zm-6 9.8h.2v3.4H6a.8.8 0 0 1-.8-.8v-1.8a.8.8 0 0 1 .8-.8Zm12 0a.8.8 0 0 1 .8.8v1.8a.8.8 0 0 1-.8.8h-.2v-3.4h.2Z" /></svg>
+        </span>
+        <span>
+          <strong>{{ section.settings.contact_heading }}</strong>
+          <small>{{ section.settings.contact_text }}</small>
+        </span>
+      </div>
+      <a class="kizzu-faq__contact-link" href="mailto:{{ section.settings.email }}">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M3 5h18v14H3V5Zm2 2v.6l7 4.4 7-4.4V7H5Zm14 2.7-7 4.4-7-4.4V17h14V9.7Z" /></svg>
+        <span><strong>Email us</strong><small>{{ section.settings.email }}</small></span>
+      </a>
+      <a class="kizzu-faq__contact-link" href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' }}">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 3a8.7 8.7 0 0 0-7.4 13.3L3.5 21l4.9-1.1A8.7 8.7 0 1 0 12 3Zm0 1.8a6.9 6.9 0 1 1-3 13.1l-.3-.2-2.7.6.6-2.6-.2-.3A6.9 6.9 0 0 1 12 4.8Zm-3.1 3.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4.2.5.7 1.7.7 1.8s0 .3-.1.4l-.4.5c-.1.1-.2.3-.1.5.3.5.7 1.1 1.2 1.5.8.7 1.4.9 1.6 1 .2.1.3.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.3.1.4.2.4.3s0 1-.7 1.6c-.4.4-.9.5-1.5.5-.4 0-.9-.1-1.3-.3-2.4-.9-4-2.9-4.5-3.6-.1-.1-1.1-1.5-1.1-2.9 0-1.3.7-2 .9-2.3Z" /></svg>
+        <span><strong>WhatsApp us</strong><small>{{ section.settings.whatsapp }}</small></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kizzu FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "FAQS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Everything you need to know about Kizzu Toys"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_item",
+      "label": "Open first FAQ by default",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Right Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "Wooden learning toys in a playroom"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact Heading",
+      "default": "Still have questions?"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact Text",
+      "default": "We're here to help!"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "hello@kizzu.toys"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "WhatsApp Number",
+      "default": "+91 98765 43210"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "age", "label": "Age Group" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "box", "label": "Box" },
+            { "value": "return", "label": "Return" },
+            { "value": "truck", "label": "Truck" }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Are Kizzu toys safe for my child?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Yes! All Kizzu toys are made from child-safe, non-toxic materials and meet international safety standards, ensuring worry-free play.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kizzu FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "icon": "shield",
+            "question": "Are Kizzu toys safe for my child?",
+            "answer": "<p>Yes! All Kizzu toys are made from child-safe, non-toxic materials and meet international safety standards, ensuring worry-free play.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "icon": "age",
+            "question": "What age group are Kizzu toys suitable for?",
+            "answer": "<p>Our collection includes toys for babies, toddlers and growing kids. Check each product page for the recommended age range.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "icon": "leaf",
+            "question": "How do I clean and maintain the toys?",
+            "answer": "<p>Wipe toys gently with a clean damp cloth and let them air dry. Avoid harsh chemicals or soaking wooden toys in water.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "icon": "box",
+            "question": "Do you offer Cash on Delivery (COD)?",
+            "answer": "<p>Yes, Cash on Delivery is available on eligible orders and locations during checkout.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "icon": "return",
+            "question": "What is your return and exchange policy?",
+            "answer": "<p>We offer easy returns and exchanges on eligible products. Please keep the item unused with its original packaging.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "icon": "truck",
+            "question": "How long does shipping take?",
+            "answer": "<p>Most orders are processed quickly and delivered within a few business days, depending on your location.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

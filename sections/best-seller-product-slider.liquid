@@ -1,10 +1,19 @@
-{{ 'best-seller-product-slider.css  ' | asset_url | stylesheet_tag }}
+{{ 'best-seller-product-slider.css' | asset_url | stylesheet_tag }}
 
 <section class="cps section-{{ section.id }}">
   <div class="cps__container">
 
     {% if section.settings.heading != blank or section.settings.description != blank %}
       <div class="cps__header">
+        {% if section.settings.badge_text != blank %}
+          <div class="cps__badge">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+              <path d="M12 2 14.6 8.2 21.3 8.8 16.2 13.2 17.7 19.8 12 16.3 6.3 19.8 7.8 13.2 2.7 8.8 9.4 8.2 12 2Z"/>
+            </svg>
+            <span>{{ section.settings.badge_text }}</span>
+          </div>
+        {% endif %}
+
         {% if section.settings.heading != blank %}
           <h2>{{ section.settings.heading }}</h2>
         {% endif %}
@@ -21,7 +30,9 @@
       <div class="cps__slider-wrap">
 
         <button class="cps__arrow cps__arrow--prev" type="button" aria-label="Previous">
-          &#8249;
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+            <path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4-4.6-4.6 4.6-4.6Z"/>
+          </svg>
         </button>
 
         <div class="cps__slider" id="CpsSlider-{{ section.id }}">
@@ -66,7 +77,10 @@
                         {% unless product.available %}disabled{% endunless %}
                       >
                         {% if product.available %}
-                          {{ section.settings.card_button_text }}
+                          <span>{{ section.settings.card_button_text }}</span>
+                          <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20">
+                            <path d="M6.3 16.8a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Zm9.1 0a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0ZM4.1 3.2H2V1.7h3.2l.5 2.4h12l-1.6 7.2H7.2l.3 1.4h8.6v1.5H6.3L4.1 3.2Zm2 2.4.9 4.2h7.9l.9-4.2H6.1Z" />
+                          </svg>
                         {% else %}
                           Sold Out
                         {% endif %}
@@ -81,7 +95,9 @@
         </div>
 
         <button class="cps__arrow cps__arrow--next" type="button" aria-label="Next">
-          &#8250;
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+            <path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4 4.6 4.6-4.6 4.6Z"/>
+          </svg>
         </button>
 
       </div>
@@ -101,15 +117,17 @@
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  function initCpsSlider{{ section.id | replace: '-', '_' }}() {
     const section = document.querySelector('.section-{{ section.id }}');
-    if (!section) return;
+    if (!section || section.dataset.cpsSliderInitialized === 'true') return;
 
     const slider = section.querySelector('#CpsSlider-{{ section.id }}');
     const prevBtn = section.querySelector('.cps__arrow--prev');
     const nextBtn = section.querySelector('.cps__arrow--next');
+    const productForms = section.querySelectorAll('.cps-card__form');
 
     if (!slider || !prevBtn || !nextBtn) return;
+    section.dataset.cpsSliderInitialized = 'true';
 
     function getSlideWidth() {
       const slide = slider.querySelector('.cps__slide');
@@ -117,6 +135,13 @@
 
       const gap = parseInt(window.getComputedStyle(slider).columnGap) || 20;
       return slide.offsetWidth + gap;
+    }
+
+    function updateArrowVisibility() {
+      const hasOverflow = slider.scrollWidth > slider.clientWidth + 2;
+      prevBtn.hidden = !hasOverflow;
+      nextBtn.hidden = !hasOverflow;
+      section.classList.toggle('cps--no-arrows', !hasOverflow);
     }
 
     prevBtn.addEventListener('click', function () {
@@ -132,6 +157,81 @@
         behavior: 'smooth'
       });
     });
+
+    updateArrowVisibility();
+    window.addEventListener('resize', updateArrowVisibility);
+    slider.querySelectorAll('img').forEach(function (image) {
+      if (image.complete) return;
+      image.addEventListener('load', updateArrowVisibility, { once: true });
+    });
+
+    productForms.forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        const cartDrawer = document.querySelector('cart-drawer');
+        if (!cartDrawer || typeof cartDrawer.renderContents !== 'function') return;
+
+        event.preventDefault();
+
+        const submitButton = form.querySelector('[type="submit"]');
+        const formData = new FormData(form);
+        const sections = cartDrawer.getSectionsToRender().map(function (sectionToRender) {
+          return sectionToRender.id;
+        });
+
+        formData.append('sections', sections);
+        formData.append('sections_url', window.location.pathname);
+        cartDrawer.setActiveElement(document.activeElement);
+
+        if (submitButton) {
+          submitButton.setAttribute('aria-disabled', 'true');
+          submitButton.disabled = true;
+        }
+
+        fetch(window.routes && window.routes.cart_add_url ? window.routes.cart_add_url : '/cart/add.js', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: formData
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (response) {
+            if (response.status) {
+              alert(response.description || response.message || 'Unable to add this product to cart.');
+              return;
+            }
+
+            cartDrawer.classList.remove('is-empty');
+            cartDrawer.renderContents(response);
+          })
+          .catch(function () {
+            form.submit();
+          })
+          .finally(function () {
+            if (submitButton) {
+              submitButton.removeAttribute('aria-disabled');
+              submitButton.disabled = false;
+            }
+          });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCpsSlider{{ section.id | replace: '-', '_' }});
+  } else {
+    initCpsSlider{{ section.id | replace: '-', '_' }}();
+  }
+
+  document.addEventListener('shopify:section:load', function (event) {
+    if (event.detail && event.detail.sectionId === '{{ section.id }}') {
+      const section = document.querySelector('.section-{{ section.id }}');
+      if (section) section.dataset.cpsSliderInitialized = 'false';
+      initCpsSlider{{ section.id | replace: '-', '_' }}();
+    }
   });
 </script>
 
@@ -139,6 +239,12 @@
 {
   "name": "Collection Products",
   "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Best Sellers"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -169,13 +275,13 @@
       "type": "text",
       "id": "card_button_text",
       "label": "Product Button Text",
-      "default": "SHOP NOW"
+      "default": "ADD TO CART"
     },
     {
       "type": "checkbox",
       "id": "show_price",
       "label": "Show Price",
-      "default": false
+      "default": true
     },
     {
       "type": "text",

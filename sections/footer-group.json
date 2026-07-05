@@ -1,1 +1,44 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"blocks_qhyWW7":{"type":"_blocks","blocks":{"ai_gen_block_40426e1_zUHDbQ":{"type":"ai_gen_block_40426e1","settings":{"heading":"Get in touch","show_address":true,"address_label":"Address","address":"<p>101, Shivpark , Motavarachha, Surat -394101<\/p>","show_phone":true,"phone_label":"Phone \/ whatsapp","phone":"+91 9426862783","show_email":true,"email_label":"Email","email":"kizzutoys1@gmail.com","show_hours":true,"hours_label":"Business hours","hours":"<p>Monday - Saturday : 10:00 AM - 7:00 PM<br\/><\/p>","desktop_width_percent":100,"padding":40,"border_radius":0,"item_spacing":24,"icon_spacing":16,"heading_spacing":24,"heading_size":28,"label_size":14,"value_size":16,"icon_size":24,"background_color":"#1f1f21","text_color":"#ffffff","label_color":"#e3fc02","icon_color":"#e3fc02","link_color":"#e3fc02"},"blocks":{}}},"block_order":["ai_gen_block_40426e1_zUHDbQ"],"name":"Contact details","settings":{}},"newsletter":{"type":"newsletter","blocks":{"heading":{"type":"heading","settings":{"heading":"SUBSCRIBE TO OUR EMAILS","heading_size":"h1"}},"paragraph":{"type":"paragraph","settings":{"text":"<p>Be the first to know about new collections and exclusive offers.<\/p>"}},"email-form":{"type":"email_form","settings":{}}},"block_order":["heading","paragraph","email-form"],"settings":{"color_scheme":"scheme-4","full_width":true,"padding_top":40,"padding_bottom":56}},"footer":{"type":"footer","settings":{"color_scheme":"scheme-2","newsletter_enable":false,"newsletter_heading":"","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":44,"padding_bottom":40}}},"order":["blocks_qhyWW7","newsletter","footer"]}
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop_by_age_menu": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop By Age",
+            "menu": "shop-by-age"
+          }
+        },
+        "our_company_menu": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Our Company",
+            "menu": "our-company"
+          }
+        }
+      },
+      "block_order": [
+        "shop_by_age_menu",
+        "our_company_menu"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "logo_width": 180,
+        "description": "<p>Thoughtfully designed toys that inspire learning, creativity and joyful play.</p>",
+        "newsletter_heading": "Stay in the loop",
+        "newsletter_text": "Sign up for exclusive offers, new launches and parenting tips.",
+        "contact_heading": "Get in touch",
+        "contact_address": "101, Shivpark , Motavarachha, Surat -394101",
+        "contact_phone": "+91 9426862783",
+        "contact_email": "kizzutoys1@gmail.com",
+        "business_hours": "Monday - Saturday : 10:00 AM - 7:00 PM"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

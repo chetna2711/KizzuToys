@@ -26,7 +26,7 @@
   background: #ffffff;
   color: #008f86;
   box-shadow: 0 0.4rem 1.4rem rgba(8, 20, 40, 0.08);
-  font-size: 1.25rem;
+  font-size: 14px;
   font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -42,7 +42,7 @@
   position: relative;
   margin: 0;
   color: #07143a;
-  font-size: clamp(3rem, 3.3vw, 5.2rem);
+  font-size: 36px;
   font-weight: 900;
   line-height: 1.12;
   letter-spacing: 0;
@@ -62,7 +62,7 @@
   max-width: 72rem;
   margin: 1.8rem auto 0;
   color: #172142;
-  font-size: 1.55rem;
+  font-size: 16px;
   line-height: 1.55;
 }
 
@@ -150,6 +150,20 @@
 @media screen and (max-width: 749px) {
   .why-kizzu__header {
     margin-bottom: 3rem;
+  }
+
+  .why-kizzu__badge {
+    min-height: 3.4rem;
+    padding: 0.7rem 1.8rem;
+    font-size: 12px;
+  }
+
+  .why-kizzu__heading {
+    font-size: 28px;
+  }
+
+  .why-kizzu__description {
+    font-size: 14px;
   }
 
   .why-kizzu__grid {
