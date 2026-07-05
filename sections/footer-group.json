@@ -18,14 +18,14 @@
           "type": "link_list",
           "settings": {
             "heading": "Shop By Category",
-            "menu": "shop-by-category"
+            "menu": ""
           }
         },
         "our_company_menu": {
           "type": "link_list",
           "settings": {
             "heading": "Our Company",
-            "menu": ""
+            "menu": "our-company"
           }
         }
       },
