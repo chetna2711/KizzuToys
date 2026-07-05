@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "Footer",
   "type": "footer",
@@ -8,15 +17,15 @@
         "shop_by_age_menu": {
           "type": "link_list",
           "settings": {
-            "heading": "Shop By Age",
-            "menu": "shop-by-age"
+            "heading": "Shop By Category",
+            "menu": "shop-by-category"
           }
         },
         "our_company_menu": {
           "type": "link_list",
           "settings": {
             "heading": "Our Company",
-            "menu": "our-company"
+            "menu": ""
           }
         }
       },
