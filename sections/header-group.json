@@ -48,7 +48,7 @@
         "menu_color_scheme": "scheme-1",
         "show_search_icon": true,
         "show_account_icon": true,
-        "show_wishlist_icon": true,
+        "show_wishlist_icon": false,
         "show_cart_icon": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
