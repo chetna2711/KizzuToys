@@ -52,7 +52,7 @@
             "image": "shopify://shop_images/c3.png",
             "title": "STEM Toys",
             "button_label": "Shop Now",
-            "button_url": "shopify://collections/die-cast-model"
+            "button_url": "shopify://collections/stem-toys"
           }
         },
         "card_montessori_toys": {
@@ -145,8 +145,8 @@
       "type": "best-seller-product-slider",
       "name": "Collection Products Slider",
       "settings": {
-        "heading": "Best Sellers",
         "badge_text": "Best Sellers",
+        "heading": "Best Sellers",
         "description": "Discover our most loved toys by parents and kids",
         "collection": "musical-toys",
         "product_count": 10,
@@ -297,8 +297,8 @@
         "ai_gen_block_41f5fdc_GxTHfe": {
           "type": "ai_gen_block_41f5fdc",
           "settings": {
-            "heading": "What our customers say",
             "badge_text": "Testimonials",
+            "heading": "What our customers say",
             "subheading": "Real reviews from real customers",
             "heading_alignment": "center",
             "heading_size": 36,
