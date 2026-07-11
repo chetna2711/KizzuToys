@@ -52,16 +52,10 @@
   font-size: 36px;
 }
 
-.featured-collection-cards__description {
+.featured-collection-cards__description p {
   font-size: 16px;
   line-height: 1.45;
   color: #172142;
-  max-width: 78rem;
-  margin: 0 auto;
-}
-
-.featured-collection-cards__description p {
-  margin: 0;
 }
 
 /* Grid */
@@ -278,10 +272,6 @@
     font-size: 28px;
   }
 
-  .featured-collection-cards__description {
-    font-size: 14px;
-  }
-
   .badge {
     min-height: 3.4rem;
     padding: 0.7rem 1.8rem;
@@ -312,8 +302,14 @@
   }
 
   .button {
+    width: 100%;
+    min-width: 0;
     min-height: 2.5rem;
     padding: 0.6rem 1.1rem;
     font-size: 0.95rem;
+  }
+
+  .featured-collection-card__button {
+    align-self: stretch;
   }
 }

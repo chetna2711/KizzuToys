@@ -412,12 +412,29 @@ a.product__text {
 @media screen and (max-width: 749px) {
   .product-form__buttons {
     gap: 0.8rem;
+    width: 100%;
+  }
+
+  .product-form__buttons:has(.shopify-payment-button) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .product-form__buttons .product-form__submit,
   .product-form__buttons .shopify-payment-button__button {
-    min-height: 4.4rem;
+    min-width: 0;
+    min-height: 4.6rem;
+    height: 4.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     font-size: 1.3rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .product-form__buttons .shopify-payment-button,
+  .product-form__buttons .shopify-payment-button__button--unbranded {
+    min-width: 0;
   }
 }
 
