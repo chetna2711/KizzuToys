@@ -11,6 +11,30 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_9dULbY": {
+          "type": "announcement",
+          "settings": {
+            "text": "Fast Delivery All Over India | Easy Returns Available || Trusted by 10,000+ Happy Indian Customers",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_9dULbY"
+      ],
+      "settings": {
+        "auto_rotate": true,
+        "change_slides_speed": 10,
+        "color_scheme": "scheme-4",
+        "show_line_separator": false,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -37,39 +61,11 @@
     "1779707031c9d7bd44": {
       "type": "_blocks",
       "settings": {}
-    },
-    "178401221297826c16": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_9477d8a_WrcLLe": {
-          "type": "ai_gen_block_9477d8a",
-          "settings": {
-            "text": "<p>Fast Delivery All Over India | Easy Returns Available || Trusted by 10,000+ Happy Indian Customers</p>",
-            "show_icon": true,
-            "icon_type": "megaphone",
-            "icon_size": 20,
-            "dismissible": true,
-            "text_alignment": "center",
-            "max_width": 1200,
-            "padding_vertical": 12,
-            "font_size": 14,
-            "background_color": "#e3fc02",
-            "text_color": "#1f1f21",
-            "link_color": "#1f1f21",
-            "link_hover_color": "#000000"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_9477d8a_WrcLLe"
-      ],
-      "settings": {}
     }
   },
   "order": [
+    "announcement-bar",
     "header",
-    "1779707031c9d7bd44",
-    "178401221297826c16"
+    "1779707031c9d7bd44"
   ]
 }
