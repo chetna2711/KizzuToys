@@ -17,13 +17,29 @@
         "announcement_9dULbY": {
           "type": "announcement",
           "settings": {
-            "text": "Fast Delivery All Over India | Easy Returns Available || Trusted by 10,000+ Happy Indian Customers",
+            "text": "Fast Delivery All Over India | Easy Returns Available || Trusted by 12,000+ Happy Indian Customers",
+            "link": ""
+          }
+        },
+        "announcement_ApWAzJ": {
+          "type": "announcement",
+          "settings": {
+            "text": "Fast Delivery All Over India | Easy Returns Available || Trusted by 12,000+ Happy Indian Customers",
+            "link": ""
+          }
+        },
+        "announcement_cHgChx": {
+          "type": "announcement",
+          "settings": {
+            "text": "Fast Delivery All Over India | Easy Returns Available || Trusted by 12,000+ Happy Indian Customers",
             "link": ""
           }
         }
       },
       "block_order": [
-        "announcement_9dULbY"
+        "announcement_9dULbY",
+        "announcement_ApWAzJ",
+        "announcement_cHgChx"
       ],
       "settings": {
         "auto_rotate": true,
