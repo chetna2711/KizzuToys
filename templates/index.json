@@ -46,6 +46,24 @@
     "featured_collection_cards_categories": {
       "type": "featured-collection-cards",
       "blocks": {
+        "card_94HaKE": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/6242071719166284225.jpg",
+            "title": "Educational Toy",
+            "button_label": "Shop Now",
+            "button_url": "shopify://collections/educational-toys"
+          }
+        },
+        "card_LDzL4w": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/6095942290212851557_ca74c0d5-8df0-456b-b0ec-14a06b3b20b1.jpg",
+            "title": "RC Car",
+            "button_label": "Shop Now",
+            "button_url": "shopify://collections/rc-car"
+          }
+        },
         "card_stem_toys": {
           "type": "card",
           "settings": {
@@ -61,7 +79,7 @@
             "image": "shopify://shop_images/c5.png",
             "title": "Montessori Toys",
             "button_label": "Shop Now",
-            "button_url": "shopify://collections/rc-car"
+            "button_url": "shopify://products/wooden-montessori-activity-cube-rocket-shape-5-in-1-educational-learning-toy-shape-sorter-abacus-beads-rotating-gears-sensory-play-early-development-toy-for-kids-1-3-years"
           }
         },
         "card_wooden_toys": {
@@ -70,43 +88,25 @@
             "image": "shopify://shop_images/c4.png",
             "title": "Wooden Toys",
             "button_label": "Shop Now",
-            "button_url": "shopify://collections/role-play-toys"
+            "button_url": "shopify://collections/wooden-toy"
           }
         },
         "card_puzzles": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/2_1fe28606-e561-4bc3-9582-5887f4220f32.jpg",
+            "image": "shopify://shop_images/81i96wfoDFL._SL1500_29076308-4e54-4a25-8ca5-78e3d2617549.jpg",
             "title": "Puzzles",
             "button_label": "Shop Now",
-            "button_url": "shopify://collections/rc-car"
-          }
-        },
-        "card_art_craft": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/c6.png",
-            "title": "Art & Craft",
-            "button_label": "Shop Now",
-            "button_url": "shopify://collections/role-play-toys"
+            "button_url": "shopify://collections/stem-toys"
           }
         },
         "card_pretend_play": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/c1.png",
+            "image": "shopify://shop_images/1_9c66e871-1ce5-4304-8bfa-60f5ddc23e03.jpg",
             "title": "Pretend Play",
             "button_label": "Shop Now",
-            "button_url": "shopify://collections/musical-toys"
-          }
-        },
-        "card_science_kits": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/6_63246183-932f-4c39-85f1-1c691cb32b2d.jpg",
-            "title": "Science Kits",
-            "button_label": "Shop Now",
-            "button_url": "shopify://collections/games"
+            "button_url": "shopify://collections/role-play-toys"
           }
         },
         "card_brain_games": {
@@ -115,18 +115,18 @@
             "image": "shopify://shop_images/c2.png",
             "title": "Brain Games",
             "button_label": "Shop Now",
-            "button_url": "shopify://collections/educational-toys"
+            "button_url": "shopify://collections/games"
           }
         }
       },
       "block_order": [
+        "card_94HaKE",
+        "card_LDzL4w",
         "card_stem_toys",
         "card_montessori_toys",
         "card_wooden_toys",
         "card_puzzles",
-        "card_art_craft",
         "card_pretend_play",
-        "card_science_kits",
         "card_brain_games"
       ],
       "name": "Featured Collection Cards",
