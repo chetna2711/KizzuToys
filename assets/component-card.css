@@ -668,12 +668,38 @@
   text-align: left !important;
 }
 
-.product-grid .card-information > .price .price__regular,
-.product-grid .card-information > .price .price__sale {
+.product-grid .card-information > .price .price__regular {
   display: flex !important;
   justify-content: flex-start !important;
   text-align: left !important;
   width: 100%;
+}
+
+.product-grid .card-information > .price .price__sale {
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.8rem;
+  text-align: left;
+  width: 100%;
+}
+
+.product-grid .card-information > .price.price--on-sale .price__regular {
+  display: none !important;
+}
+
+.product-grid .card-information > .price.price--on-sale .price__sale {
+  display: flex !important;
+}
+
+.product-grid .card-information > .price.price--on-sale .price__sale > span {
+  display: inline-block !important;
+}
+
+.product-grid .card-information > .price.price--on-sale .price-item--regular {
+  color: rgba(6, 21, 47, 0.65);
+  text-decoration: line-through;
+  visibility: visible !important;
 }
 
 .product-grid .card-information > .price .price-item {

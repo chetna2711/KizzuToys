@@ -110,13 +110,19 @@
 
                       <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape }}</a>
 
-                      {%- if item.original_price != item.final_price -%}
+                      {%- liquid
+                        assign display_original_price = item.original_price
+                        if item.variant.compare_at_price > item.final_price
+                          assign display_original_price = item.variant.compare_at_price
+                        endif
+                      -%}
+                      {%- if display_original_price > item.final_price -%}
                         <div class="cart-item__discounted-prices">
                           <span class="visually-hidden">
                             {{ 'products.product.price.regular_price' | t }}
                           </span>
                           <s class="cart-item__old-price product-option">
-                            {{- item.original_price | money -}}
+                            {{- display_original_price | money -}}
                           </s>
                           <span class="visually-hidden">
                             {{ 'products.product.price.sale_price' | t }}
@@ -127,7 +133,7 @@
                         </div>
                       {%- else -%}
                         <div class="product-option">
-                          {{ item.original_price | money }}
+                          {{ item.final_price | money }}
                         </div>
                       {%- endif -%}
 
