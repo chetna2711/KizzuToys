@@ -14,7 +14,7 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_AbRMae": {
+        "announcement_9dULbY": {
           "type": "announcement",
           "settings": {
             "text": "Fast Delivery All Over India | Easy Returns Available || Trusted by 10,000+ Happy Indian Customers",
@@ -23,7 +23,7 @@
         }
       },
       "block_order": [
-        "announcement_AbRMae"
+        "announcement_9dULbY"
       ],
       "settings": {
         "auto_rotate": true,
