@@ -87,7 +87,7 @@
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
-  {% comment %} <div class="kizzu-topbar page-width">
+  <div class="kizzu-topbar page-width">
     <div class="kizzu-topbar__item">
      
       <span>Free Shipping on Orders Above &#8377;999</span>
@@ -101,7 +101,7 @@
       <span class="kizzu-topbar__icon" aria-hidden="true">&#9993;</span>
       <span>kizzutoys1@gmail.com</span>
     </div>
-  </div> {% endcomment %}
+  </div>
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
