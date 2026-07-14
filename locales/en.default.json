@@ -177,6 +177,7 @@
       "xr_button": "View in your space",
       "xr_button_label": "View in your space, loads item in augmented reality window",
       "taxes_included": "Taxes included.",
+      "fast_free_shipping": "Fast &amp; Free Shipping",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
       "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
@@ -296,7 +297,7 @@
       "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
       "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "Duties and taxes included. Discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",
       "duties_and_taxes_included_shipping_at_checkout_without_policy": "Duties and taxes included. Discounts and shipping calculated at checkout.",
-      "taxes_included_shipping_at_checkout_with_policy_html": "Taxes included. Discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",
+      "taxes_included_shipping_at_checkout_with_policy_html": "Fast &amp; Free Shipping",
       "taxes_included_shipping_at_checkout_without_policy": "Taxes included. Discounts and shipping calculated at checkout.",
       "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "Duties included. Taxes, discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",
       "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "Duties included. Taxes, discounts and shipping calculated at checkout.",
