@@ -1,6 +1,1331 @@
+{% doc %}
+  @prompt
+    Create an A+ style product listing section for a Shopify product page that includes: a rich brand story banner with full-width lifestyle image and overlay text, a feature highlights grid with icons and short descriptions, a product comparison table, and a "Why Choose Us" section with trust badges. The design should be visually rich, mobile-friendly, and suitable for a toy store.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-aplus-listing-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-aplus-brand-banner-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    min-height: {{ block.settings.banner_height }}px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .ai-aplus-brand-banner-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.banner_height }}px;
+    object-fit: cover;
+  }
+
+  .ai-aplus-brand-banner-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.banner_height }}px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-aplus-brand-banner-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 400px;
+  }
+
+  .ai-aplus-brand-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ block.settings.overlay_color }};
+    opacity: {{ block.settings.overlay_opacity }};
+  }
+
+  .ai-aplus-brand-content-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: {{ block.settings.banner_text_color }};
+    width: 90%;
+    max-width: 800px;
+    z-index: 1;
+  }
+
+  .ai-aplus-brand-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.banner_title_size }}px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+
+  .ai-aplus-brand-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.banner_text_size }}px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-aplus-features-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+
+  .ai-aplus-feature-card-{{ ai_gen_id }} {
+    background: {{ block.settings.feature_bg_color }};
+    border: {{ block.settings.feature_border_width }}px solid {{ block.settings.feature_border_color }};
+    border-radius: {{ block.settings.feature_border_radius }}px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .ai-aplus-feature-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: {{ block.settings.icon_bg_color }};
+    border-radius: 50%;
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-aplus-feature-icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.icon_size }}px * 0.5);
+    height: calc({{ block.settings.icon_size }}px * 0.5);
+  }
+
+  .ai-aplus-feature-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_title_size }}px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: {{ block.settings.feature_text_color }};
+  }
+
+  .ai-aplus-feature-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_desc_size }}px;
+    line-height: 1.5;
+    color: {{ block.settings.feature_text_color }};
+    margin: 0;
+  }
+
+  .ai-aplus-comparison-{{ ai_gen_id }} {
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+
+  .ai-aplus-comparison-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.section_title_size }}px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 24px;
+    color: {{ block.settings.section_title_color }};
+  }
+
+  .ai-aplus-comparison-table-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: collapse;
+    background: {{ block.settings.table_bg_color }};
+    border-radius: {{ block.settings.table_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-aplus-comparison-table-{{ ai_gen_id }} th,
+  .ai-aplus-comparison-table-{{ ai_gen_id }} td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid {{ block.settings.table_border_color }};
+  }
+
+  .ai-aplus-comparison-table-{{ ai_gen_id }} th {
+    background: {{ block.settings.table_header_bg }};
+    color: {{ block.settings.table_header_color }};
+    font-weight: 600;
+    font-size: {{ block.settings.table_header_size }}px;
+  }
+
+  .ai-aplus-comparison-table-{{ ai_gen_id }} td {
+    color: {{ block.settings.table_text_color }};
+    font-size: {{ block.settings.table_text_size }}px;
+  }
+
+  .ai-aplus-comparison-table-{{ ai_gen_id }} tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ai-aplus-comparison-checkmark-{{ ai_gen_id }} {
+    color: {{ block.settings.checkmark_color }};
+    font-size: 20px;
+  }
+
+  .ai-aplus-comparison-cross-{{ ai_gen_id }} {
+    color: {{ block.settings.cross_color }};
+    font-size: 20px;
+  }
+
+  .ai-aplus-trust-{{ ai_gen_id }} {
+    background: {{ block.settings.trust_bg_color }};
+    padding: 40px 20px;
+    border-radius: {{ block.settings.trust_border_radius }}px;
+  }
+
+  .ai-aplus-trust-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.section_title_size }}px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 32px;
+    color: {{ block.settings.trust_title_color }};
+  }
+
+  .ai-aplus-trust-badges-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .ai-aplus-trust-badge-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: {{ block.settings.badge_bg_color }};
+    border-radius: {{ block.settings.badge_border_radius }}px;
+    border: {{ block.settings.badge_border_width }}px solid {{ block.settings.badge_border_color }};
+  }
+
+  .ai-aplus-trust-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.trust_icon_size }}px;
+    height: {{ block.settings.trust_icon_size }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: {{ block.settings.trust_icon_bg }};
+    border-radius: 50%;
+    color: {{ block.settings.trust_icon_color }};
+  }
+
+  .ai-aplus-trust-icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.trust_icon_size }}px * 0.5);
+    height: calc({{ block.settings.trust_icon_size }}px * 0.5);
+  }
+
+  .ai-aplus-trust-text-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-aplus-trust-badge-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.badge_title_size }}px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: {{ block.settings.badge_text_color }};
+  }
+
+  .ai-aplus-trust-badge-desc-{{ ai_gen_id }} {
+    font-size: {{ block.settings.badge_desc_size }}px;
+    margin: 0;
+    color: {{ block.settings.badge_text_color }};
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-aplus-brand-banner-{{ ai_gen_id }} {
+      min-height: {{ block.settings.banner_height | times: 0.6 }}px;
+    }
+
+    .ai-aplus-brand-banner-image-{{ ai_gen_id }},
+    .ai-aplus-brand-banner-placeholder-{{ ai_gen_id }} {
+      height: {{ block.settings.banner_height | times: 0.6 }}px;
+    }
+
+    .ai-aplus-brand-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.banner_title_size | times: 0.6 }}px;
+    }
+
+    .ai-aplus-brand-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.banner_text_size | times: 0.9 }}px;
+    }
+
+    .ai-aplus-features-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-aplus-comparison-table-{{ ai_gen_id }} {
+      font-size: 14px;
+    }
+
+    .ai-aplus-comparison-table-{{ ai_gen_id }} th,
+    .ai-aplus-comparison-table-{{ ai_gen_id }} td {
+      padding: 12px 8px;
+    }
+
+    .ai-aplus-trust-badges-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<aplus-listing-{{ ai_gen_id }} class="ai-aplus-listing-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-aplus-brand-banner-{{ ai_gen_id }}">
+    {% if block.settings.banner_image %}
+      <img
+        src="{{ block.settings.banner_image | image_url: width: 2000 }}"
+        alt="{{ block.settings.banner_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.banner_image.width }}"
+        height="{{ block.settings.banner_image.height }}"
+        class="ai-aplus-brand-banner-image-{{ ai_gen_id }}"
+      >
+    {% else %}
+      <div class="ai-aplus-brand-banner-placeholder-{{ ai_gen_id }}">
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+    <div class="ai-aplus-brand-overlay-{{ ai_gen_id }}"></div>
+    <div class="ai-aplus-brand-content-{{ ai_gen_id }}">
+      {% if block.settings.banner_title != blank %}
+        <h2 class="ai-aplus-brand-title-{{ ai_gen_id }}">{{ block.settings.banner_title }}</h2>
+      {% endif %}
+      {% if block.settings.banner_description != blank %}
+        <div class="ai-aplus-brand-description-{{ ai_gen_id }}">{{ block.settings.banner_description }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if block.settings.show_features %}
+    <div class="ai-aplus-features-{{ ai_gen_id }}">
+      {% for i in (1..4) %}
+        {% liquid
+          assign feature_enabled_key = 'feature_' | append: i | append: '_enabled'
+          assign feature_title_key = 'feature_' | append: i | append: '_title'
+          assign feature_desc_key = 'feature_' | append: i | append: '_description'
+          assign feature_icon_key = 'feature_' | append: i | append: '_icon'
+
+          assign feature_enabled = block.settings[feature_enabled_key]
+          assign feature_title = block.settings[feature_title_key]
+          assign feature_desc = block.settings[feature_desc_key]
+          assign feature_icon = block.settings[feature_icon_key]
+        %}
+
+        {% if feature_enabled %}
+          <div class="ai-aplus-feature-card-{{ ai_gen_id }}">
+            <div class="ai-aplus-feature-icon-{{ ai_gen_id }}">
+              {% case feature_icon %}
+                {% when 'star' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                {% when 'shield' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                {% when 'heart' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                {% when 'gift' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+                {% when 'truck' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 18.5a1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5m1.5-9l1.96 2.5H17V9.5m-11 9A1.5 1.5 0 0 1 4.5 17 1.5 1.5 0 0 1 6 15.5 1.5 1.5 0 0 1 7.5 17 1.5 1.5 0 0 1 6 18.5M20 8h-3V4H3c-1.11 0-2 .89-2 2v11h2a3 3 0 0 0 3 3 3 3 0 0 0 3-3h6a3 3 0 0 0 3 3 3 3 0 0 0 3-3h2v-5l-3-4z"/></svg>
+                {% when 'check' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              {% endcase %}
+            </div>
+            {% if feature_title != blank %}
+              <h3 class="ai-aplus-feature-title-{{ ai_gen_id }}">{{ feature_title }}</h3>
+            {% endif %}
+            {% if feature_desc != blank %}
+              <p class="ai-aplus-feature-description-{{ ai_gen_id }}">{{ feature_desc }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_comparison %}
+    <div class="ai-aplus-comparison-{{ ai_gen_id }}">
+      {% if block.settings.comparison_title != blank %}
+        <h2 class="ai-aplus-comparison-title-{{ ai_gen_id }}">{{ block.settings.comparison_title }}</h2>
+      {% endif %}
+      <table class="ai-aplus-comparison-table-{{ ai_gen_id }}">
+        <thead>
+          <tr>
+            <th>{{ block.settings.table_col1_header }}</th>
+            <th>{{ block.settings.table_col2_header }}</th>
+            <th>{{ block.settings.table_col3_header }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in (1..5) %}
+            {% liquid
+              assign row_enabled_key = 'table_row_' | append: i | append: '_enabled'
+              assign row_feature_key = 'table_row_' | append: i | append: '_feature'
+              assign row_col2_key = 'table_row_' | append: i | append: '_col2'
+              assign row_col3_key = 'table_row_' | append: i | append: '_col3'
+
+              assign row_enabled = block.settings[row_enabled_key]
+              assign row_feature = block.settings[row_feature_key]
+              assign row_col2 = block.settings[row_col2_key]
+              assign row_col3 = block.settings[row_col3_key]
+            %}
+
+            {% if row_enabled %}
+              <tr>
+                <td>{{ row_feature }}</td>
+                <td>
+                  {% if row_col2 == 'yes' %}
+                    <span class="ai-aplus-comparison-checkmark-{{ ai_gen_id }}">✓</span>
+                  {% elsif row_col2 == 'no' %}
+                    <span class="ai-aplus-comparison-cross-{{ ai_gen_id }}">✗</span>
+                  {% else %}
+                    {{ row_col2 }}
+                  {% endif %}
+                </td>
+                <td>
+                  {% if row_col3 == 'yes' %}
+                    <span class="ai-aplus-comparison-checkmark-{{ ai_gen_id }}">✓</span>
+                  {% elsif row_col3 == 'no' %}
+                    <span class="ai-aplus-comparison-cross-{{ ai_gen_id }}">✗</span>
+                  {% else %}
+                    {{ row_col3 }}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_trust %}
+    <div class="ai-aplus-trust-{{ ai_gen_id }}">
+      {% if block.settings.trust_title != blank %}
+        <h2 class="ai-aplus-trust-title-{{ ai_gen_id }}">{{ block.settings.trust_title }}</h2>
+      {% endif %}
+      <div class="ai-aplus-trust-badges-{{ ai_gen_id }}">
+        {% for i in (1..4) %}
+          {% liquid
+            assign badge_enabled_key = 'trust_badge_' | append: i | append: '_enabled'
+            assign badge_title_key = 'trust_badge_' | append: i | append: '_title'
+            assign badge_desc_key = 'trust_badge_' | append: i | append: '_description'
+            assign badge_icon_key = 'trust_badge_' | append: i | append: '_icon'
+
+            assign badge_enabled = block.settings[badge_enabled_key]
+            assign badge_title = block.settings[badge_title_key]
+            assign badge_desc = block.settings[badge_desc_key]
+            assign badge_icon = block.settings[badge_icon_key]
+          %}
+
+          {% if badge_enabled %}
+            <div class="ai-aplus-trust-badge-{{ ai_gen_id }}">
+              <div class="ai-aplus-trust-icon-{{ ai_gen_id }}">
+                {% case badge_icon %}
+                  {% when 'shield' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                  {% when 'truck' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 18.5a1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5m1.5-9l1.96 2.5H17V9.5m-11 9A1.5 1.5 0 0 1 4.5 17 1.5 1.5 0 0 1 6 15.5 1.5 1.5 0 0 1 7.5 17 1.5 1.5 0 0 1 6 18.5M20 8h-3V4H3c-1.11 0-2 .89-2 2v11h2a3 3 0 0 0 3 3 3 3 0 0 0 3-3h6a3 3 0 0 0 3 3 3 3 0 0 0 3-3h2v-5l-3-4z"/></svg>
+                  {% when 'award' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.39l-3.76 2.27.99-4.28-3.32-2.88 4.38-.38L12 6.09l1.71 4.04 4.38.38-3.32 2.88.99 4.28M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24z"/></svg>
+                  {% when 'refresh' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                  {% when 'lock' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                  {% when 'check' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                {% endcase %}
+              </div>
+              <div class="ai-aplus-trust-text-{{ ai_gen_id }}">
+                {% if badge_title != blank %}
+                  <div class="ai-aplus-trust-badge-title-{{ ai_gen_id }}">{{ badge_title }}</div>
+                {% endif %}
+                {% if badge_desc != blank %}
+                  <div class="ai-aplus-trust-badge-desc-{{ ai_gen_id }}">{{ badge_desc }}</div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</aplus-listing-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AplusListing{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('aplus-listing-{{ ai_gen_id }}', AplusListing{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "A+ product listing",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand story banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image"
+    },
+    {
+      "type": "range",
+      "id": "banner_height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Banner height",
+      "default": 400
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Title",
+      "default": "Premium Quality Toys for Happy Kids"
+    },
+    {
+      "type": "textarea",
+      "id": "banner_description",
+      "label": "Description",
+      "default": "Crafted with love and care, our toys inspire creativity and bring joy to children worldwide"
+    },
+    {
+      "type": "range",
+      "id": "banner_title_size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "banner_text_size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Text size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "banner_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Overlay opacity",
+      "default": 0.4
+    },
+    {
+      "type": "header",
+      "content": "Feature highlights"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show features section",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "feature_bg_color",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Text color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "range",
+      "id": "feature_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "feature_border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "feature_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon background",
+      "default": "#e3fc02"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "feature_desc_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_1_enabled",
+      "label": "Enable feature 1",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "feature_1_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "star", "label": "Star" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "heart", "label": "Heart" },
+        { "value": "gift", "label": "Gift" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "star"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_title",
+      "label": "Title",
+      "default": "Premium Quality"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_1_description",
+      "label": "Description",
+      "default": "Made from safe, non-toxic materials"
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_2_enabled",
+      "label": "Enable feature 2",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "feature_2_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "star", "label": "Star" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "heart", "label": "Heart" },
+        { "value": "gift", "label": "Gift" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "shield"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_title",
+      "label": "Title",
+      "default": "Safety Tested"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_2_description",
+      "label": "Description",
+      "default": "Meets international safety standards"
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_3_enabled",
+      "label": "Enable feature 3",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "feature_3_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "star", "label": "Star" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "heart", "label": "Heart" },
+        { "value": "gift", "label": "Gift" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "heart"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_title",
+      "label": "Title",
+      "default": "Educational Fun"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_3_description",
+      "label": "Description",
+      "default": "Promotes learning through play"
+    },
+    {
+      "type": "header",
+      "content": "Feature 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_4_enabled",
+      "label": "Enable feature 4",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "feature_4_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "star", "label": "Star" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "heart", "label": "Heart" },
+        { "value": "gift", "label": "Gift" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "gift"
+    },
+    {
+      "type": "text",
+      "id": "feature_4_title",
+      "label": "Title",
+      "default": "Perfect Gift"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_4_description",
+      "label": "Description",
+      "default": "Beautifully packaged and ready to gift"
+    },
+    {
+      "type": "header",
+      "content": "Comparison table"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comparison",
+      "label": "Show comparison table",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "comparison_title",
+      "label": "Section title",
+      "default": "Why Choose Our Toys?"
+    },
+    {
+      "type": "color",
+      "id": "table_bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "table_header_bg",
+      "label": "Header background",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "color",
+      "id": "table_header_color",
+      "label": "Header text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "table_text_color",
+      "label": "Text color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "color",
+      "id": "table_border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "table_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "table_header_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Header size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "table_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "checkmark_color",
+      "label": "Checkmark color",
+      "default": "#00fced"
+    },
+    {
+      "type": "color",
+      "id": "cross_color",
+      "label": "Cross color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "text",
+      "id": "table_col1_header",
+      "label": "Column 1 header",
+      "default": "Feature"
+    },
+    {
+      "type": "text",
+      "id": "table_col2_header",
+      "label": "Column 2 header",
+      "default": "Our Product"
+    },
+    {
+      "type": "text",
+      "id": "table_col3_header",
+      "label": "Column 3 header",
+      "default": "Others"
+    },
+    {
+      "type": "header",
+      "content": "Table row 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "table_row_1_enabled",
+      "label": "Enable row 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "table_row_1_feature",
+      "label": "Feature name",
+      "default": "Safety certified"
+    },
+    {
+      "type": "text",
+      "id": "table_row_1_col2",
+      "label": "Column 2 value",
+      "default": "yes"
+    },
+    {
+      "type": "text",
+      "id": "table_row_1_col3",
+      "label": "Column 3 value",
+      "default": "no"
+    },
+    {
+      "type": "header",
+      "content": "Table row 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "table_row_2_enabled",
+      "label": "Enable row 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "table_row_2_feature",
+      "label": "Feature name",
+      "default": "Eco-friendly materials"
+    },
+    {
+      "type": "text",
+      "id": "table_row_2_col2",
+      "label": "Column 2 value",
+      "default": "yes"
+    },
+    {
+      "type": "text",
+      "id": "table_row_2_col3",
+      "label": "Column 3 value",
+      "default": "no"
+    },
+    {
+      "type": "header",
+      "content": "Table row 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "table_row_3_enabled",
+      "label": "Enable row 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "table_row_3_feature",
+      "label": "Feature name",
+      "default": "Warranty period"
+    },
+    {
+      "type": "text",
+      "id": "table_row_3_col2",
+      "label": "Column 2 value",
+      "default": "2 years"
+    },
+    {
+      "type": "text",
+      "id": "table_row_3_col3",
+      "label": "Column 3 value",
+      "default": "6 months"
+    },
+    {
+      "type": "header",
+      "content": "Table row 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "table_row_4_enabled",
+      "label": "Enable row 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "table_row_4_feature",
+      "label": "Feature name",
+      "default": "Educational value"
+    },
+    {
+      "type": "text",
+      "id": "table_row_4_col2",
+      "label": "Column 2 value",
+      "default": "yes"
+    },
+    {
+      "type": "text",
+      "id": "table_row_4_col3",
+      "label": "Column 3 value",
+      "default": "no"
+    },
+    {
+      "type": "header",
+      "content": "Table row 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "table_row_5_enabled",
+      "label": "Enable row 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "table_row_5_feature",
+      "label": "Feature name",
+      "default": "Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "table_row_5_col2",
+      "label": "Column 2 value",
+      "default": "yes"
+    },
+    {
+      "type": "text",
+      "id": "table_row_5_col3",
+      "label": "Column 3 value",
+      "default": "no"
+    },
+    {
+      "type": "header",
+      "content": "Why choose us section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust",
+      "label": "Show trust badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_title",
+      "label": "Section title",
+      "default": "Why Choose KIZZU TOYS?"
+    },
+    {
+      "type": "color",
+      "id": "trust_title_color",
+      "label": "Title color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "color",
+      "id": "trust_bg_color",
+      "label": "Background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "range",
+      "id": "trust_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "badge_border_color",
+      "label": "Badge border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "trust_icon_size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "trust_icon_bg",
+      "label": "Icon background",
+      "default": "#e3fc02"
+    },
+    {
+      "type": "color",
+      "id": "trust_icon_color",
+      "label": "Icon color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "range",
+      "id": "badge_title_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "badge_desc_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Trust badge 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "trust_badge_1_enabled",
+      "label": "Enable badge 1",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "trust_badge_1_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "shield", "label": "Shield" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "award", "label": "Award" },
+        { "value": "refresh", "label": "Refresh" },
+        { "value": "lock", "label": "Lock" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "shield"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_1_title",
+      "label": "Title",
+      "default": "100% Safe"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_1_description",
+      "label": "Description",
+      "default": "Certified non-toxic materials"
+    },
+    {
+      "type": "header",
+      "content": "Trust badge 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "trust_badge_2_enabled",
+      "label": "Enable badge 2",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "trust_badge_2_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "shield", "label": "Shield" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "award", "label": "Award" },
+        { "value": "refresh", "label": "Refresh" },
+        { "value": "lock", "label": "Lock" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "truck"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_title",
+      "label": "Title",
+      "default": "Fast Shipping"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_description",
+      "label": "Description",
+      "default": "Free delivery on all orders"
+    },
+    {
+      "type": "header",
+      "content": "Trust badge 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "trust_badge_3_enabled",
+      "label": "Enable badge 3",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "trust_badge_3_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "shield", "label": "Shield" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "award", "label": "Award" },
+        { "value": "refresh", "label": "Refresh" },
+        { "value": "lock", "label": "Lock" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "award"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_3_title",
+      "label": "Title",
+      "default": "Award Winning"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_3_description",
+      "label": "Description",
+      "default": "Recognized for quality & design"
+    },
+    {
+      "type": "header",
+      "content": "Trust badge 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "trust_badge_4_enabled",
+      "label": "Enable badge 4",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "trust_badge_4_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "shield", "label": "Shield" },
+        { "value": "truck", "label": "Truck" },
+        { "value": "award", "label": "Award" },
+        { "value": "refresh", "label": "Refresh" },
+        { "value": "lock", "label": "Lock" },
+        { "value": "check", "label": "Check" }
+      ],
+      "default": "refresh"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_4_title",
+      "label": "Title",
+      "default": "Easy Returns"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_4_description",
+      "label": "Description",
+      "default": "30-day money back guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Section styling"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Section title size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "section_title_color",
+      "label": "Section title color",
+      "default": "#1f1f21"
+    }
+  ],
+  "presets": [
+    {
+      "name": "A+ product listing"
+    }
+  ]
+}
 {% endschema %}
