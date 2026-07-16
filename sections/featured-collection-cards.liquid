@@ -60,7 +60,7 @@
                   <div class="featured-collection-card__image">
                 {{ block.settings.image | image_url: width: 500 | image_tag: alt: block.settings.title }}
               </div>
-                  <span aria-hidden="true">&rarr;</span>
+                  {% comment %} <span aria-hidden="true">&rarr;</span> {% endcomment %}
                 </a>
               
             {% else %}
