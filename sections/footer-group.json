@@ -35,7 +35,15 @@
       ],
       "settings": {
         "color_scheme": "scheme-3",
-        "newsletter_heading": "Stay in the loop"
+        "logo_width": 180,
+        "description": "<p>Thoughtfully designed toys that inspire learning, creativity and joyful play.</p>",
+        "newsletter_heading": "Stay in the loop",
+        "newsletter_text": "Sign up for exclusive offers, new launches and parenting tips.",
+        "contact_heading": "Get in touch",
+        "contact_address": "Motavarachha, Surat -394101",
+        "contact_phone": "+91 9426862783",
+        "contact_email": "kizzutoys1@gmail.com",
+        "business_hours": "Monday - Saturday : 10:00 AM - 7:00 PM"
       }
     }
   },
