@@ -48,9 +48,21 @@
         {% for block in section.blocks %}
           <div class="featured-collection-card" {{ block.shopify_attributes }}>
             {% if block.settings.image != blank %}
-              <div class="featured-collection-card__image">
+              <a 
+                  {% if block.settings.button_url == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.button_url }}"
+                  {% endif %}
+                  class="button button--primary featured-collection-card__button"
+                >
+                  {{ block.settings.button_label }}
+                  <div class="featured-collection-card__image">
                 {{ block.settings.image | image_url: width: 500 | image_tag: alt: block.settings.title }}
               </div>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              
             {% else %}
               <div class="featured-collection-card__image featured-collection-card__image--placeholder">
                 <span>{{ block.settings.title | default: 'Toys' | truncate: 2, '' }}</span>
