@@ -1,6 +1,319 @@
+{% doc %}
+  @prompt
+    Make the entire Featured Collection card clickable so that clicking anywhere on the card navigates to the card's button URL. The card block has a title, image, button label, and button URL. The whole card area should act as a link to the button URL, not just the button itself.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-featured-collection-card-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.card_border_radius }}px;
+    background-color: {{ block.settings.card_background_color }};
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-featured-collection-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-featured-collection-card-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ai-featured-collection-card-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-featured-collection-card-{{ ai_gen_id }}:hover .ai-featured-collection-card-image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-featured-collection-card-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-featured-collection-card-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-featured-collection-card-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-featured-collection-card-content-{{ ai_gen_id }} {
+    padding: {{ block.settings.card_padding }}px;
+  }
+
+  .ai-featured-collection-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: {{ block.settings.title_color }};
+  }
+
+  .ai-featured-collection-card-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    pointer-events: none;
+  }
+
+  .ai-featured-collection-card-{{ ai_gen_id }}:hover .ai-featured-collection-card-button-{{ ai_gen_id }} {
+    background-color: {{ block.settings.button_hover_background_color }};
+  }
+
+  .ai-featured-collection-card-button-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-featured-collection-card-{{ ai_gen_id }}:hover .ai-featured-collection-card-button-icon-{{ ai_gen_id }} {
+    transform: translateX(4px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-featured-collection-card-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-featured-collection-card-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_font_size | times: 0.85 }}px;
+    }
+
+    .ai-featured-collection-card-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+      padding: 10px 20px;
+    }
+  }
+{% endstyle %}
+
+<a
+  href="{{ block.settings.button_url }}"
+  class="ai-featured-collection-card-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+  {% if block.settings.button_url == blank %}aria-disabled="true"{% endif %}
+>
+  <div class="ai-featured-collection-card-image-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.card_image %}
+      <img
+        src="{{ block.settings.card_image | image_url: width: 1200 }}"
+        alt="{{ block.settings.card_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.card_image.width }}"
+        height="{{ block.settings.card_image.height }}"
+        class="ai-featured-collection-card-image-{{ ai_gen_id }}"
+      >
+    {% else %}
+      <div class="ai-featured-collection-card-placeholder-{{ ai_gen_id }}">
+        {{ 'collection-apparel-1' | placeholder_svg_tag }}
+        <div class="ai-featured-collection-card-empty-state-{{ ai_gen_id }}">
+          Next, add an image
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-featured-collection-card-content-{{ ai_gen_id }}">
+    {% if block.settings.card_title != blank %}
+      <h3 class="ai-featured-collection-card-title-{{ ai_gen_id }}">
+        {{ block.settings.card_title }}
+      </h3>
+    {% endif %}
+
+    {% if block.settings.button_label != blank %}
+      <span class="ai-featured-collection-card-button-{{ ai_gen_id }}">
+        {{ block.settings.button_label }}
+        <svg
+          class="ai-featured-collection-card-button-icon-{{ ai_gen_id }}"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </span>
+    {% endif %}
+  </div>
+</a>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Featured collection card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card content"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Title",
+      "default": "Featured Collection"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card background",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "header",
+      "content": "Title style"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Font size",
+      "min": 14,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Background",
+      "default": "#e3fc02"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Hover background",
+      "default": "#d4ed00"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#1f1f21"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection card"
+    }
+  ]
+}
 {% endschema %}
