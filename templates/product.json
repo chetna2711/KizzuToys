@@ -88,6 +88,22 @@
         "padding_bottom": 12
       }
     },
+    "video_KNeGXP": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "Video",
+        "heading_size": "h1",
+        "enable_video_looping": true,
+        "video": "shopify://files/videos/WhatsApp Video 2026-02-09 at 5.32.30 PM.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 4,
+        "padding_bottom": 8
+      }
+    },
     "multirow_maLp9y": {
       "type": "multirow",
       "blocks": {
@@ -127,7 +143,6 @@
         "row_QdyHkF",
         "row_MTGzPR"
       ],
-      "disabled": true,
       "name": "t:sections.multirow.presets.name",
       "settings": {
         "image_height": "medium",
@@ -166,6 +181,7 @@
   },
   "order": [
     "main",
+    "video_KNeGXP",
     "multirow_maLp9y",
     "related-products"
   ]
