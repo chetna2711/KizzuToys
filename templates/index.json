@@ -297,6 +297,7 @@
         "testimonial_Ei9kxb": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/4_0edf3bb3-a896-49f4-9871-a094a0fa2ccc.jpg",
             "rating": 5,
             "description": "<p>Excellent quality! My son absolutely loves this remote control car. It's sturdy, fast, and the battery lasts longer than expected.</p>",
             "customer_name": "Priya Sharma",
@@ -307,6 +308,7 @@
         "testimonial_UaQ8XH": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/ChatGPTImageMay30_2026_03_30_00PM.png",
             "rating": 5,
             "description": "<p>My daughter spends hours playing with this supermarket set. The accessories are colorful and durable.</p>",
             "customer_name": "Riddhi Patel",
@@ -317,6 +319,7 @@
         "testimonial_g6B9nT": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/6242071719166284222.jpg",
             "rating": 5,
             "description": "<p>Perfect educational toy! It helped my little one learn shapes and colors while having fun.</p>",
             "customer_name": "Neha Mehta",
@@ -327,16 +330,18 @@
         "testimonial_wihTDh": {
           "type": "testimonial",
           "settings": {
-            "rating": 5,
+            "image": "shopify://shop_images/6_63246183-932f-4c39-85f1-1c691cb32b2d.jpg",
+            "rating": 4,
             "description": "<p>Amazing sound quality and bright lights. My toddler enjoys playing with it every single day.</p>",
             "customer_name": "Aarti Shah",
             "product_name": "Musical Piano Toy",
-            "verified": true
+            "verified": false
           }
         },
         "testimonial_WF4qnK": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/6244323518979969216.jpg",
             "rating": 5,
             "description": "<p>The blocks are easy to assemble and great for improving creativity. Highly recommended for kids.</p>",
             "customer_name": "Karan Joshi",
@@ -349,6 +354,7 @@
           "settings": {
             "rating": 5,
             "description": "<p>Very realistic accessories! My child loves pretending to be a doctor. Great learning toy.</p>",
+            "avatar": "shopify://shop_images/619YTqKglyL._SL1314.jpg",
             "customer_name": "Sneha Desai",
             "product_name": "Doctor Play Kit",
             "verified": true
@@ -357,6 +363,7 @@
         "testimonial_PyCMpm": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/image_d09c4a3.png",
             "rating": 5,
             "description": "<p>Beautiful design with lots of accessories. The quality exceeded my expectations.</p>",
             "customer_name": "Pooja Trivedi",
@@ -369,6 +376,7 @@
           "settings": {
             "rating": 5,
             "description": "<p>Easy to install and perfect for indoor play. Keeps my kids active and entertained.</p>",
+            "avatar": "shopify://shop_images/81PCcgoxL0L._SL1500.jpg",
             "customer_name": "Rahul Verma",
             "product_name": "Mini Basketball Hoop Set",
             "verified": true
@@ -377,6 +385,7 @@
         "testimonial_naKpAV": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/6242071719166284209_1.jpg",
             "rating": 5,
             "description": "<p>The moving dinosaur with lights and sounds is a huge hit in our home. Worth every penny!</p>",
             "customer_name": "Amit Singh",
@@ -387,11 +396,12 @@
         "testimonial_hipVHM": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/1_7f6ab535-4efb-4d0c-b2dc-e56be1e434ae.jpg",
             "rating": 5,
             "description": "<p>Super soft, adorable, and exactly as shown in the pictures. My daughter sleeps with it every night.</p>",
             "customer_name": "Kavya Nair",
             "product_name": "Plush Teddy Bear",
-            "verified": true
+            "verified": false
           }
         }
       },
