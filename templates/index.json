@@ -291,76 +291,132 @@
         "whatsapp": "+91 9426862783"
       }
     },
-    "blocks_XYW3Dq": {
-      "type": "_blocks",
+    "kizzu_testimonials_UXRw7X": {
+      "type": "kizzu-testimonials",
       "blocks": {
-        "ai_gen_block_41f5fdc_GxTHfe": {
-          "type": "ai_gen_block_41f5fdc",
+        "testimonial_Ei9kxb": {
+          "type": "testimonial",
           "settings": {
-            "badge_text": "Testimonials",
-            "heading": "What our customers say",
-            "subheading": "Real reviews from real customers",
-            "heading_alignment": "center",
-            "heading_size": 36,
-            "subheading_size": 16,
-            "desktop_width_percent": 100,
-            "cards_per_view": "3",
-            "cards_per_view_tablet": "2",
-            "card_gap": 20,
-            "background_color": "#ffffff",
-            "heading_color": "#1f1f21",
-            "text_color": "#1f1f21",
-            "card_background": "#f5f5f5",
-            "star_color": "#e3fc02",
-            "star_empty_color": "#d1d1d1",
-            "avatar_background": "#e0e0e0",
-            "nav_button_color": "#008f86",
-            "nav_button_hover_color": "#006f69",
-            "nav_icon_color": "#ffffff",
-            "dot_color": "#d1d1d1",
-            "dot_active_color": "#1f1f21",
-            "card_border_radius": 8,
-            "star_size": 20,
-            "review_text_size": 16,
-            "review_1_enabled": true,
-            "review_1_rating": 5,
-            "review_1_text": "Absolutely love these toys! My kids play with them every day and they're still in perfect condition.",
-            "review_1_author": "Sarah Johnson",
-            "review_1_title": "Verified buyer",
-            "review_2_enabled": true,
-            "review_2_rating": 5,
-            "review_2_text": "Great quality and fast shipping. The toys are educational and fun. Highly recommend!",
-            "review_2_author": "Michael Chen",
-            "review_2_title": "Verified buyer",
-            "review_3_enabled": true,
-            "review_3_rating": 4,
-            "review_3_text": "My daughter loves her new toys. They're safe, durable, and keep her entertained for hours.",
-            "review_3_author": "Priya Sharma",
-            "review_3_title": "Verified buyer",
-            "review_4_enabled": true,
-            "review_4_rating": 5,
-            "review_4_text": "Excellent customer service and amazing products. Will definitely order again!",
-            "review_4_author": "Rajesh Kumar",
-            "review_4_title": "Verified buyer",
-            "review_5_enabled": true,
-            "review_5_rating": 5,
-            "review_5_text": "Best toy store! The quality is outstanding and my kids are so happy with their new toys.",
-            "review_5_author": "Anita Desai",
-            "review_5_title": "Verified buyer",
-            "review_6_enabled": true,
-            "review_6_rating": 4,
-            "review_6_text": "Good value for money. The toys are well-made and my son enjoys playing with them daily.",
-            "review_6_author": "Vikram Patel",
-            "review_6_title": "Verified buyer"
-          },
-          "blocks": {}
+            "rating": 5,
+            "description": "<p>Excellent quality! My son absolutely loves this remote control car. It's sturdy, fast, and the battery lasts longer than expected.</p>",
+            "customer_name": "Priya Sharma",
+            "product_name": "Remote Control Car",
+            "verified": true
+          }
+        },
+        "testimonial_UaQ8XH": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>My daughter spends hours playing with this supermarket set. The accessories are colorful and durable.</p>",
+            "customer_name": "Riddhi Patel",
+            "product_name": "Kids Supermarket Play Set",
+            "verified": true
+          }
+        },
+        "testimonial_g6B9nT": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>Perfect educational toy! It helped my little one learn shapes and colors while having fun.</p>",
+            "customer_name": "Neha Mehta",
+            "product_name": "Wooden Learning Puzzle",
+            "verified": true
+          }
+        },
+        "testimonial_wihTDh": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>Amazing sound quality and bright lights. My toddler enjoys playing with it every single day.</p>",
+            "customer_name": "Aarti Shah",
+            "product_name": "Musical Piano Toy",
+            "verified": true
+          }
+        },
+        "testimonial_WF4qnK": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>The blocks are easy to assemble and great for improving creativity. Highly recommended for kids.</p>",
+            "customer_name": "Karan Joshi",
+            "product_name": "Building Blocks Set",
+            "verified": true
+          }
+        },
+        "testimonial_jhHJLX": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>Very realistic accessories! My child loves pretending to be a doctor. Great learning toy.</p>",
+            "customer_name": "Sneha Desai",
+            "product_name": "Doctor Play Kit",
+            "verified": true
+          }
+        },
+        "testimonial_PyCMpm": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>Beautiful design with lots of accessories. The quality exceeded my expectations.</p>",
+            "customer_name": "Pooja Trivedi",
+            "product_name": "Kitchen Play Set",
+            "verified": true
+          }
+        },
+        "testimonial_TLgiHc": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>Easy to install and perfect for indoor play. Keeps my kids active and entertained.</p>",
+            "customer_name": "Rahul Verma",
+            "product_name": "Mini Basketball Hoop Set",
+            "verified": true
+          }
+        },
+        "testimonial_naKpAV": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>The moving dinosaur with lights and sounds is a huge hit in our home. Worth every penny!</p>",
+            "customer_name": "Amit Singh",
+            "product_name": "Walking Dinosaur Toy",
+            "verified": true
+          }
+        },
+        "testimonial_hipVHM": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "description": "<p>Super soft, adorable, and exactly as shown in the pictures. My daughter sleeps with it every night.</p>",
+            "customer_name": "Kavya Nair",
+            "product_name": "Plush Teddy Bear",
+            "verified": true
+          }
         }
       },
       "block_order": [
-        "ai_gen_block_41f5fdc_GxTHfe"
+        "testimonial_Ei9kxb",
+        "testimonial_UaQ8XH",
+        "testimonial_g6B9nT",
+        "testimonial_wihTDh",
+        "testimonial_WF4qnK",
+        "testimonial_jhHJLX",
+        "testimonial_PyCMpm",
+        "testimonial_TLgiHc",
+        "testimonial_naKpAV",
+        "testimonial_hipVHM"
       ],
-      "name": "Customer reviews carousel",
-      "settings": {}
+      "name": "Kizzu Testimonials",
+      "settings": {
+        "badge_text": "HAPPY CUSTOMERS",
+        "heading": "Happy Kids,",
+        "heading_highlight": "Happy Parents",
+        "description": "<p>See why families love shopping with Kizzu Toys.</p>",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
@@ -369,6 +425,6 @@
     "best_seller_product_slider_rrzeWc",
     "why_choose_kizzu",
     "kizzu_faq",
-    "blocks_XYW3Dq"
+    "kizzu_testimonials_UXRw7X"
   ]
 }
