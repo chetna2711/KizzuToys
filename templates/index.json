@@ -294,6 +294,17 @@
     "kizzu_testimonials_UXRw7X": {
       "type": "kizzu-testimonials",
       "blocks": {
+        "testimonial_wJhApm": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2026-07-22_at_2.18.17_PM.jpg",
+            "rating": 5,
+            "description": "<p>मैंने यह <strong>डक शेप USB रिचार्जेबल ऑडियो प्लेयर</strong> अपने बच्चे के लिए खरीदा और यह उम्मीद से भी बेहतर निकला। इसका प्यारा डक डिज़ाइन बच्चों को तुरंत पसंद आ जाता है। इसकी साउंड क्वालिटी साफ़ है और इसमें पहले से मौजूद गाने बच्चों का अच्छा मनोरंजन करते हैं।<br/><br/></p>",
+            "customer_name": "Piyush Kanak",
+            "product_name": "Musical Toy",
+            "verified": true
+          }
+        },
         "testimonial_JW4qx3": {
           "type": "testimonial",
           "settings": {
@@ -418,6 +429,7 @@
         }
       },
       "block_order": [
+        "testimonial_wJhApm",
         "testimonial_JW4qx3",
         "testimonial_Ei9kxb",
         "testimonial_UaQ8XH",
