@@ -449,8 +449,8 @@
         "heading_highlight": "Happy Parents",
         "description": "<p>See why families love shopping with Kizzu Toys.</p>",
         "color_scheme": "",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 8,
+        "padding_bottom": 12
       }
     }
   },
