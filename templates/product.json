@@ -104,6 +104,7 @@
         },
         "row_QdyHkF": {
           "type": "row",
+          "disabled": true,
           "settings": {
             "caption": "Caption",
             "heading": "Row",
@@ -128,7 +129,6 @@
         "row_QdyHkF",
         "row_MTGzPR"
       ],
-      "disabled": true,
       "name": "t:sections.multirow.presets.name",
       "settings": {
         "image_height": "medium",
