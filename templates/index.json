@@ -294,6 +294,17 @@
     "kizzu_testimonials_UXRw7X": {
       "type": "kizzu-testimonials",
       "blocks": {
+        "testimonial_JW4qx3": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2026-07-22_at_2.19.19_PM.jpg",
+            "rating": 5,
+            "description": "<p>This is an excellent value-for-money RC toy. It's entertaining, easy to use, and perfect for gifting or everyday fun. I would definitely recommend it to anyone looking for a small, reliable remote control car. 🚗💙<br/><br/></p>",
+            "customer_name": "Mahi Patel",
+            "product_name": "Remote Control Car",
+            "verified": true
+          }
+        },
         "testimonial_Ei9kxb": {
           "type": "testimonial",
           "settings": {
@@ -407,6 +418,7 @@
         }
       },
       "block_order": [
+        "testimonial_JW4qx3",
         "testimonial_Ei9kxb",
         "testimonial_UaQ8XH",
         "testimonial_g6B9nT",
