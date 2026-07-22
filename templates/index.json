@@ -299,16 +299,16 @@
           "settings": {
             "image": "shopify://shop_images/4_0edf3bb3-a896-49f4-9871-a094a0fa2ccc.jpg",
             "rating": 5,
-            "description": "<p>Excellent quality! My son absolutely loves this remote control car. It's sturdy, fast, and the battery lasts longer than expected.</p>",
+            "description": "<p>Excellent quality! My son absolutely loves this car. </p>",
             "customer_name": "Priya Sharma",
-            "product_name": "Remote Control Car",
+            "product_name": "Die-Cast Car",
             "verified": true
           }
         },
         "testimonial_UaQ8XH": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/ChatGPTImageMay30_2026_03_30_00PM.png",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-07-22_at_12.32.37_PM.jpg",
             "rating": 5,
             "description": "<p>My daughter spends hours playing with this supermarket set. The accessories are colorful and durable.</p>",
             "customer_name": "Riddhi Patel",
@@ -330,7 +330,7 @@
         "testimonial_wihTDh": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/6_63246183-932f-4c39-85f1-1c691cb32b2d.jpg",
+            "image": "shopify://shop_images/1_7fa49752-8db1-4447-b443-d49997375574.jpg",
             "rating": 4,
             "description": "<p>Amazing sound quality and bright lights. My toddler enjoys playing with it every single day.</p>",
             "customer_name": "Aarti Shah",
@@ -352,11 +352,12 @@
         "testimonial_jhHJLX": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2026-07-22_at_12.44.33_PM.jpg",
             "rating": 5,
-            "description": "<p>Very realistic accessories! My child loves pretending to be a doctor. Great learning toy.</p>",
+            "description": "<p><br/>I bought this remote control racing car for my child, and it has been a fantastic purchase. The car is lightweight, easy to control, and responds quickly to the remote. The sporty design with bright racing stripes makes it look attractive, and the build quality is good for everyday play.<br/><br/></p>",
             "avatar": "shopify://shop_images/619YTqKglyL._SL1314.jpg",
             "customer_name": "Sneha Desai",
-            "product_name": "Doctor Play Kit",
+            "product_name": "Remote Control Car",
             "verified": true
           }
         },
