@@ -355,7 +355,6 @@
             "image": "shopify://shop_images/WhatsApp_Image_2026-07-22_at_12.44.33_PM.jpg",
             "rating": 5,
             "description": "<p><br/>I bought this remote control racing car for my child, and it has been a fantastic purchase. The car is lightweight, easy to control, and responds quickly to the remote. The sporty design with bright racing stripes makes it look attractive, and the build quality is good for everyday play.<br/><br/></p>",
-            "avatar": "shopify://shop_images/619YTqKglyL._SL1314.jpg",
             "customer_name": "Sneha Desai",
             "product_name": "Remote Control Car",
             "verified": true
@@ -375,11 +374,12 @@
         "testimonial_TLgiHc": {
           "type": "testimonial",
           "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2026-07-10_at_2.54.26_PM.jpg",
             "rating": 5,
-            "description": "<p>Easy to install and perfect for indoor play. Keeps my kids active and entertained.</p>",
+            "description": "<p>Easy to Play and perfect for indoor play. Keeps my kids active and entertained.</p>",
             "avatar": "shopify://shop_images/81PCcgoxL0L._SL1500.jpg",
             "customer_name": "Rahul Verma",
-            "product_name": "Mini Basketball Hoop Set",
+            "product_name": "Puzzle Set",
             "verified": true
           }
         },
