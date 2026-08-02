@@ -14,6 +14,13 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_riipcF": {
+          "type": "announcement",
+          "settings": {
+            "text": "EXTRA 10% OFF ON PREPAID ORDERS",
+            "link": ""
+          }
+        },
         "announcement_9dULbY": {
           "type": "announcement",
           "settings": {
@@ -37,6 +44,7 @@
         }
       },
       "block_order": [
+        "announcement_riipcF",
         "announcement_9dULbY",
         "announcement_ApWAzJ",
         "announcement_cHgChx"
