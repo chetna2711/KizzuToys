@@ -105,13 +105,6 @@
             "show_gift_card_recipient": true
           }
         },
-        "text_FynHjG": {
-          "type": "text",
-          "settings": {
-            "text": "Estimated delivery: 4 Aug to 7 Aug",
-            "text_style": "subtitle"
-          }
-        },
         "share": {
           "type": "share",
           "disabled": true,
@@ -137,7 +130,6 @@
         "text_gzgkTw",
         "quantity_selector",
         "buy_buttons",
-        "text_FynHjG",
         "share"
       ],
       "settings": {
@@ -163,8 +155,8 @@
           "type": "ai_gen_block_57d1c9f",
           "settings": {
             "label_text": "Estimated delivery:",
-            "min_delivery_days": 4,
-            "max_delivery_days": 7,
+            "min_delivery_days": 3,
+            "max_delivery_days": 5,
             "exclude_weekends": true,
             "date_format": "short",
             "show_icon": true,
