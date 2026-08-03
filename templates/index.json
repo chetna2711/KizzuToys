@@ -20,7 +20,7 @@
         "image_behavior": "none",
         "badge_text": "Learn Through Play",
         "badge_style": "primary",
-        "heading_desktop": "<h3>{{ metaobjects[\"shopify--wood-finish\"].painted.label.value }}<strong>Premium Educational Toys That Make Learning Fun</strong></h3><h5></h5>",
+        "heading_desktop": "<h3><strong>Premium Educational Toys That Make Learning Fun</strong></h3><h5></h5>",
         "heading_mobile": "<h5>Premium Educational Toys That Make Learning Fun<br/></h5>",
         "heading_size": "h1",
         "description": "<h5></h5><ul><li><h5><strong>Safe & BIS-Compliant Toys</strong></h5></li><li><h5><strong>Free Shipping Across India</strong></h5></li><li><h5><strong>Trusted by 12000+ Parents</strong></h5></li><li><h5><strong>Cash on Delivery Available<br/></strong></h5></li></ul><h5><strong><br/><br/></strong></h5>",
