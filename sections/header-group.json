@@ -106,6 +106,7 @@
       "block_order": [
         "ai_gen_block_57d1c9f_n9EJ79"
       ],
+      "disabled": true,
       "name": "Delivery estimate",
       "settings": {}
     }
