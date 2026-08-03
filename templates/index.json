@@ -43,6 +43,21 @@
         "section_color_scheme": "scheme-5"
       }
     },
+    "best_seller_product_slider_rrzeWc": {
+      "type": "best-seller-product-slider",
+      "name": "Collection Products Slider",
+      "settings": {
+        "badge_text": "Best Sellers",
+        "heading": "Best Sellers",
+        "description": "Discover our most loved toys by parents and kids",
+        "collection": "musical-toys",
+        "product_count": 10,
+        "card_button_text": "ADD TO CART",
+        "show_price": true,
+        "bottom_button_text": "VIEW ALL",
+        "bottom_button_url": ""
+      }
+    },
     "featured_collection_cards_categories": {
       "type": "featured-collection-cards",
       "blocks": {
@@ -139,21 +154,6 @@
         "section_color_scheme": "scheme-3",
         "padding_top": 40,
         "padding_bottom": 40
-      }
-    },
-    "best_seller_product_slider_rrzeWc": {
-      "type": "best-seller-product-slider",
-      "name": "Collection Products Slider",
-      "settings": {
-        "badge_text": "Best Sellers",
-        "heading": "Best Sellers",
-        "description": "Discover our most loved toys by parents and kids",
-        "collection": "musical-toys",
-        "product_count": 10,
-        "card_button_text": "ADD TO CART",
-        "show_price": true,
-        "bottom_button_text": "VIEW ALL",
-        "bottom_button_url": ""
       }
     },
     "why_choose_kizzu": {
@@ -456,8 +456,8 @@
   },
   "order": [
     "featured_hero_cta_YBrKyY",
-    "featured_collection_cards_categories",
     "best_seller_product_slider_rrzeWc",
+    "featured_collection_cards_categories",
     "why_choose_kizzu",
     "kizzu_faq",
     "kizzu_testimonials_UXRw7X"
