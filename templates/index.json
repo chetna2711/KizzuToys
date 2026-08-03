@@ -11,6 +11,9 @@
   "sections": {
     "featured_hero_cta_YBrKyY": {
       "type": "featured-hero-cta",
+      "custom_css": [
+        ".hero-cta__description ul li h5 {display: inline-block !important;}"
+      ],
       "name": "Featured Hero CTA",
       "settings": {
         "image_desktop": "shopify://shop_images/1fcc3feb-9892-426a-b87b-607f6a3b5edc.png",
