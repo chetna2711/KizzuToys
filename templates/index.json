@@ -34,13 +34,13 @@
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
         "show_text_box": false,
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-3",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "left",
         "show_text_below": false,
         "padding_top": 0,
         "padding_bottom": 0,
-        "section_color_scheme": "scheme-3"
+        "section_color_scheme": "scheme-5"
       }
     },
     "featured_collection_cards_categories": {
