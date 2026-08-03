@@ -29,10 +29,7 @@
           }
         }
       },
-      "block_order": [
-        "announcement_riipcF",
-        "announcement_ApWAzJ"
-      ],
+      "block_order": ["announcement_riipcF", "announcement_ApWAzJ"],
       "settings": {
         "auto_rotate": true,
         "change_slides_speed": 10,
@@ -103,18 +100,11 @@
           "blocks": {}
         }
       },
-      "block_order": [
-        "ai_gen_block_57d1c9f_n9EJ79"
-      ],
+      "block_order": ["ai_gen_block_57d1c9f_n9EJ79"],
       "disabled": true,
       "name": "Delivery estimate",
       "settings": {}
     }
   },
-  "order": [
-    "announcement-bar",
-    "header",
-    "1779707031c9d7bd44",
-    "blocks_gGw8tA"
-  ]
+  "order": ["announcement-bar", "header", "1779707031c9d7bd44", "blocks_gGw8tA"]
 }

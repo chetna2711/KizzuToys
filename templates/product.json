@@ -68,6 +68,20 @@
           "type": "description",
           "settings": {}
         },
+        "delivery_estimate": {
+          "type": "delivery_estimate",
+          "settings": {
+            "order_prefix": "Order today within",
+            "delivery_prefix": "you’ll receive your package between",
+            "date_separator": "to",
+            "cutoff_time": "17:00",
+            "time_zone": "Asia/Kolkata",
+            "min_delivery_days": 2,
+            "max_delivery_days": 4,
+            "exclude_weekends": true,
+            "date_format": "numeric"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -124,6 +138,7 @@
         "product-rating",
         "price",
         "description",
+        "delivery_estimate",
         "variant_picker",
         "custom_liquid_TxTdcC",
         "custom_liquid_BUfbd3",
@@ -150,6 +165,7 @@
     },
     "blocks_4BQy3i": {
       "type": "_blocks",
+      "disabled": true,
       "blocks": {
         "ai_gen_block_57d1c9f_ewhXqW": {
           "type": "ai_gen_block_57d1c9f",

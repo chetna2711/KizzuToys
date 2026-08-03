@@ -31,6 +31,35 @@
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     }
 
+    .product-delivery-estimate {
+      align-items: flex-start;
+      background: {{ section.settings.delivery_background }};
+      border: 1px solid {{ section.settings.delivery_border }};
+      border-radius: 8px;
+      display: flex;
+      gap: 9px;
+      margin: 1.2rem 0;
+      padding: 11px 13px;
+    }
+
+    .product-delivery-estimate__icon {
+      color: {{ section.settings.delivery_icon_color }};
+      display: flex;
+      flex: 0 0 19px;
+      margin-top: 2px;
+    }
+
+    .product-delivery-estimate__icon svg { height: 19px; width: 19px; }
+
+    .product-delivery-estimate__text {
+      color: {{ section.settings.delivery_text_color }};
+      font-size: 1.4rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .product-delivery-estimate__text strong { color: {{ section.settings.delivery_text_color }}; font-weight: 700; }
+
     @media screen and (min-width: 750px) {
       .section-{{ section.id }}-padding {
         padding-top: {{ section.settings.padding_top }}px;
@@ -468,6 +497,94 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+              {%- when 'delivery_estimate' -%}
+                <div
+                  class="product-delivery-estimate"
+                  data-delivery-estimate
+                  data-cutoff-time="{{ block.settings.cutoff_time | escape }}"
+                  data-time-zone="{{ block.settings.time_zone | escape }}"
+                  data-min-days="{{ block.settings.min_delivery_days }}"
+                  data-max-days="{{ block.settings.max_delivery_days }}"
+                  data-exclude-weekends="{{ block.settings.exclude_weekends }}"
+                  data-date-format="{{ block.settings.date_format }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <span class="product-delivery-estimate__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                  </span>
+                  <p class="product-delivery-estimate__text">
+                    <span data-delivery-order-text>{{ block.settings.order_prefix }}</span>
+                    <strong data-delivery-countdown>--h -- min</strong>,
+                    <span>{{ block.settings.delivery_prefix }}</span>
+                    <strong><span data-delivery-start>--</span> {{ block.settings.date_separator }} <span data-delivery-end>--</span></strong>
+                  </p>
+                </div>
+
+                <script>
+                  (() => {
+                    if (window.KizzuDeliveryEstimate) return;
+                    window.KizzuDeliveryEstimate = true;
+
+                    const addDeliveryDays = (date, days, excludeWeekends) => {
+                      const result = new Date(date);
+                      let added = 0;
+                      while (added < days) {
+                        result.setUTCDate(result.getUTCDate() + 1);
+                        if (!excludeWeekends || ![0, 6].includes(result.getUTCDay())) added += 1;
+                      }
+                      return result;
+                    };
+
+                    const formatDate = (date, format) => {
+                      const day = String(date.getUTCDate()).padStart(2, '0');
+                      const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                      const year = date.getUTCFullYear();
+                      if (format === 'long') return new Intl.DateTimeFormat(undefined, { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+                      if (format === 'short') return new Intl.DateTimeFormat(undefined, { timeZone: 'UTC', day: 'numeric', month: 'short' }).format(date);
+                      return `${day}/${month}/${year}`;
+                    };
+
+                    const updateEstimate = (element) => {
+                      const dateOptions = {
+                        year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+                      };
+                      let formatter;
+                      try {
+                        formatter = new Intl.DateTimeFormat('en-GB', { ...dateOptions, timeZone: element.dataset.timeZone || 'Asia/Kolkata' });
+                      } catch (error) {
+                        formatter = new Intl.DateTimeFormat('en-GB', dateOptions);
+                      }
+                      const parts = formatter.formatToParts(new Date()).reduce((result, part) => {
+                        if (part.type !== 'literal') result[part.type] = Number(part.value);
+                        return result;
+                      }, {});
+                      const [hours, minutes] = (element.dataset.cutoffTime || '17:00').split(':').map(Number);
+                      const cutoffSeconds = ((Number.isFinite(hours) ? hours : 17) * 3600) + ((Number.isFinite(minutes) ? minutes : 0) * 60);
+                      const nowSeconds = (parts.hour * 3600) + (parts.minute * 60) + parts.second;
+                      const isToday = cutoffSeconds > nowSeconds;
+                      const remainingSeconds = (isToday ? cutoffSeconds : cutoffSeconds + 86400) - nowSeconds;
+                      const totalMinutes = Math.ceil(remainingSeconds / 60);
+                      const countdown = `${String(Math.floor(totalMinutes / 60)).padStart(2, '0')}h ${String(totalMinutes % 60).padStart(2, '0')} min`;
+                      const orderText = element.querySelector('[data-delivery-order-text]');
+                      const prefix = orderText.dataset.todayPrefix || orderText.textContent;
+                      orderText.dataset.todayPrefix = prefix;
+                      orderText.textContent = isToday ? prefix : prefix.replace('today', 'tomorrow');
+                      element.querySelector('[data-delivery-countdown]').textContent = countdown;
+
+                      const dispatchDate = new Date(Date.UTC(parts.year, parts.month - 1, parts.day));
+                      if (!isToday) dispatchDate.setUTCDate(dispatchDate.getUTCDate() + 1);
+                      const excludeWeekends = element.dataset.excludeWeekends === 'true';
+                      const minDate = addDeliveryDays(dispatchDate, Number(element.dataset.minDays), excludeWeekends);
+                      const maxDate = addDeliveryDays(dispatchDate, Number(element.dataset.maxDays), excludeWeekends);
+                      element.querySelector('[data-delivery-start]').textContent = formatDate(minDate, element.dataset.dateFormat);
+                      element.querySelector('[data-delivery-end]').textContent = formatDate(maxDate, element.dataset.dateFormat);
+                    };
+
+                    const refresh = () => document.querySelectorAll('[data-delivery-estimate]').forEach(updateEstimate);
+                    refresh();
+                    window.setInterval(refresh, 1000);
+                  })();
+                </script>
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -923,6 +1040,81 @@
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
+    },
+    {
+      "type": "delivery_estimate",
+      "name": "Estimated delivery",
+      "settings": [
+        {
+          "type": "text",
+          "id": "order_prefix",
+          "label": "Countdown text",
+          "default": "Order today within"
+        },
+        {
+          "type": "text",
+          "id": "delivery_prefix",
+          "label": "Delivery text",
+          "default": "you’ll receive your package between"
+        },
+        {
+          "type": "text",
+          "id": "date_separator",
+          "label": "Date separator",
+          "default": "to"
+        },
+        {
+          "type": "text",
+          "id": "cutoff_time",
+          "label": "Order cutoff time (24-hour)",
+          "info": "Use HH:MM, for example 17:00. The store time zone below is used.",
+          "default": "17:00"
+        },
+        {
+          "type": "text",
+          "id": "time_zone",
+          "label": "Store time zone",
+          "info": "Use an IANA time zone, for example Asia/Kolkata. This keeps the cutoff accurate for all visitors.",
+          "default": "Asia/Kolkata"
+        },
+        {
+          "type": "range",
+          "id": "min_delivery_days",
+          "min": 1,
+          "max": 30,
+          "step": 1,
+          "unit": " days",
+          "label": "Earliest delivery after",
+          "default": 2
+        },
+        {
+          "type": "range",
+          "id": "max_delivery_days",
+          "min": 1,
+          "max": 30,
+          "step": 1,
+          "unit": " days",
+          "label": "Latest delivery after",
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "exclude_weekends",
+          "label": "Skip Saturdays and Sundays",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "date_format",
+          "label": "Date format",
+          "options": [
+            { "value": "numeric", "label": "05/08/2026" },
+            { "value": "short", "label": "5 Aug" },
+            { "value": "long", "label": "5 August 2026" }
+          ],
+          "default": "numeric"
+        }
+      ]
     },
     {
       "type": "share",
@@ -2091,6 +2283,34 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Estimated delivery style"
+    },
+    {
+      "type": "color",
+      "id": "delivery_background",
+      "label": "Background",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "color",
+      "id": "delivery_border",
+      "label": "Border",
+      "default": "#e7e7e7"
+    },
+    {
+      "type": "color",
+      "id": "delivery_text_color",
+      "label": "Text",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "delivery_icon_color",
+      "label": "Clock icon",
+      "default": "#202020"
     },
     {
       "type": "header",
