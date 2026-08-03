@@ -69,11 +69,51 @@
     "1779707031c9d7bd44": {
       "type": "_blocks",
       "settings": {}
+    },
+    "blocks_gGw8tA": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_57d1c9f_n9EJ79": {
+          "type": "ai_gen_block_57d1c9f",
+          "name": "Delivery estimate",
+          "settings": {
+            "label_text": "Estimated delivery:",
+            "min_delivery_days": 4,
+            "max_delivery_days": 6,
+            "exclude_weekends": true,
+            "date_format": "short",
+            "show_icon": true,
+            "icon_size": 24,
+            "icon_color": "#1f1f21",
+            "label_font_size": 12,
+            "label_font_weight": "400",
+            "label_color": "#666666",
+            "dates_font_size": 16,
+            "dates_font_weight": "600",
+            "dates_color": "#1f1f21",
+            "background_color": "#f5f5f5",
+            "show_border": false,
+            "border_thickness": 1,
+            "border_color": "#e0e0e0",
+            "border_radius": 4,
+            "padding": 16,
+            "margin_top": 0,
+            "margin_bottom": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_57d1c9f_n9EJ79"
+      ],
+      "name": "Delivery estimate",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "1779707031c9d7bd44"
+    "1779707031c9d7bd44",
+    "blocks_gGw8tA"
   ]
 }

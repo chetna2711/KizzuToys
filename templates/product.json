@@ -75,6 +75,25 @@
             "swatch_shape": "circle"
           }
         },
+        "custom_liquid_TxTdcC": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "custom_liquid_BUfbd3": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "text_gzgkTw": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -106,6 +125,9 @@
         "price",
         "description",
         "variant_picker",
+        "custom_liquid_TxTdcC",
+        "custom_liquid_BUfbd3",
+        "text_gzgkTw",
         "quantity_selector",
         "buy_buttons",
         "share"
@@ -202,11 +224,16 @@
         "padding_top": 0,
         "padding_bottom": 40
       }
+    },
+    "1785768343ee31ad98": {
+      "type": "_blocks",
+      "settings": {}
     }
   },
   "order": [
     "main",
     "multirow_maLp9y",
-    "related-products"
+    "related-products",
+    "1785768343ee31ad98"
   ]
 }
