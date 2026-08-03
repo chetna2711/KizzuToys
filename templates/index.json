@@ -12,7 +12,7 @@
     "featured_hero_cta_YBrKyY": {
       "type": "featured-hero-cta",
       "custom_css": [
-        ".hero-cta__description ul li h5 {display: inline-block !important;}"
+        ".hero-cta__description ul li h5 {display: inline-block !important; color : black !important;}"
       ],
       "name": "Featured Hero CTA",
       "settings": {
