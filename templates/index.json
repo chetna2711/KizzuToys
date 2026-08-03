@@ -452,6 +452,47 @@
         "padding_top": 8,
         "padding_bottom": 12
       }
+    },
+    "1785766222e18d8d80": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1785766910fb5aff8c": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_57d1c9f_FL7TqN": {
+          "type": "ai_gen_block_57d1c9f",
+          "settings": {
+            "label_text": "Estimated delivery:",
+            "min_delivery_days": 4,
+            "max_delivery_days": 6,
+            "exclude_weekends": true,
+            "date_format": "short",
+            "show_icon": true,
+            "icon_size": 24,
+            "icon_color": "#1f1f21",
+            "label_font_size": 14,
+            "label_font_weight": "500",
+            "label_color": "#666666",
+            "dates_font_size": 16,
+            "dates_font_weight": "600",
+            "dates_color": "#1f1f21",
+            "background_color": "#f5f5f5",
+            "show_border": false,
+            "border_thickness": 1,
+            "border_color": "#e0e0e0",
+            "border_radius": 4,
+            "padding": 16,
+            "margin_top": 16,
+            "margin_bottom": 16
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_57d1c9f_FL7TqN"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -460,6 +501,8 @@
     "featured_collection_cards_categories",
     "why_choose_kizzu",
     "kizzu_faq",
-    "kizzu_testimonials_UXRw7X"
+    "kizzu_testimonials_UXRw7X",
+    "1785766222e18d8d80",
+    "1785766910fb5aff8c"
   ]
 }

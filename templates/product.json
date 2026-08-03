@@ -12,6 +12,39 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "custom_liquid_z4JPqV": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "custom_liquid_Yainkq": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "custom_liquid_KfFyTV": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "custom_liquid_dFWcRd": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "inventory_3wrNcj": {
+          "type": "inventory",
+          "disabled": true,
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -62,6 +95,11 @@
         }
       },
       "block_order": [
+        "custom_liquid_z4JPqV",
+        "custom_liquid_Yainkq",
+        "custom_liquid_KfFyTV",
+        "custom_liquid_dFWcRd",
+        "inventory_3wrNcj",
         "vendor",
         "title",
         "product-rating",
