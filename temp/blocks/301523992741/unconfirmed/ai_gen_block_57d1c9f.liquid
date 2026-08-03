@@ -1,6 +1,413 @@
+{% doc %}
+  @prompt
+    Create a delivery estimate block inside the product information section on the product page. The block should display an estimated delivery date range (e.g., "Estimated delivery: Aug 7 – Aug 10") based on the current date, with configurable lead time settings. It should be styled to match the product page and appear below the product title or description in the product information area.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-delivery-estimate-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    margin: {{ block.settings.margin_top }}px 0 {{ block.settings.margin_bottom }}px 0;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    {% if block.settings.show_border %}
+      border: {{ block.settings.border_thickness }}px solid {{ block.settings.border_color }};
+    {% endif %}
+  }
+
+  .ai-delivery-estimate__icon-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ai-delivery-estimate__icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-delivery-estimate__content-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-delivery-estimate__label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    font-weight: {{ block.settings.label_font_weight }};
+    color: {{ block.settings.label_color }};
+    margin: 0 0 4px 0;
+  }
+
+  .ai-delivery-estimate__dates-{{ ai_gen_id }} {
+    font-size: {{ block.settings.dates_font_size }}px;
+    font-weight: {{ block.settings.dates_font_weight }};
+    color: {{ block.settings.dates_color }};
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-delivery-estimate-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.8 }}px;
+    }
+
+    .ai-delivery-estimate__icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.9 }}px;
+      height: {{ block.settings.icon_size | times: 0.9 }}px;
+    }
+
+    .ai-delivery-estimate__label-{{ ai_gen_id }} {
+      font-size: {{ block.settings.label_font_size | times: 0.9 }}px;
+    }
+
+    .ai-delivery-estimate__dates-{{ ai_gen_id }} {
+      font-size: {{ block.settings.dates_font_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<delivery-estimate-{{ ai_gen_id }} class="ai-delivery-estimate-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-delivery-estimate__icon-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.show_icon %}
+      <svg class="ai-delivery-estimate__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"></rect>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+      </svg>
+    {% endif %}
+    <div class="ai-delivery-estimate__content-{{ ai_gen_id }}">
+      <p class="ai-delivery-estimate__label-{{ ai_gen_id }}">{{ block.settings.label_text }}</p>
+      <p class="ai-delivery-estimate__dates-{{ ai_gen_id }}" data-delivery-estimate></p>
+    </div>
+  </div>
+</delivery-estimate-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DeliveryEstimate{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.minDays = {{ block.settings.min_delivery_days }};
+        this.maxDays = {{ block.settings.max_delivery_days }};
+        this.dateFormat = '{{ block.settings.date_format }}';
+        this.excludeWeekends = {{ block.settings.exclude_weekends }};
+      }
+
+      connectedCallback() {
+        this.calculateDeliveryDates();
+      }
+
+      calculateDeliveryDates() {
+        const today = new Date();
+        const startDate = this.addBusinessDays(today, this.minDays);
+        const endDate = this.addBusinessDays(today, this.maxDays);
+
+        const formattedStart = this.formatDate(startDate);
+        const formattedEnd = this.formatDate(endDate);
+
+        const dateElement = this.querySelector('[data-delivery-estimate]');
+        if (dateElement) {
+          dateElement.textContent = `${formattedStart} – ${formattedEnd}`;
+        }
+      }
+
+      addBusinessDays(date, days) {
+        let currentDate = new Date(date);
+        let addedDays = 0;
+
+        while (addedDays < days) {
+          currentDate.setDate(currentDate.getDate() + 1);
+          
+          if (this.excludeWeekends) {
+            const dayOfWeek = currentDate.getDay();
+            if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+              addedDays++;
+            }
+          } else {
+            addedDays++;
+          }
+        }
+
+        return currentDate;
+      }
+
+      formatDate(date) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const monthsFull = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+
+        if (this.dateFormat === 'short') {
+          return `${months[month]} ${day}`;
+        } else if (this.dateFormat === 'long') {
+          return `${monthsFull[month]} ${day}, ${year}`;
+        } else {
+          return `${day}/${month + 1}/${year}`;
+        }
+      }
+    }
+
+    customElements.define('delivery-estimate-{{ ai_gen_id }}', DeliveryEstimate{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Delivery estimate",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "label_text",
+      "label": "Label",
+      "default": "Estimated delivery:"
+    },
+    {
+      "type": "range",
+      "id": "min_delivery_days",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "d",
+      "label": "Minimum delivery days",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "max_delivery_days",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "d",
+      "label": "Maximum delivery days",
+      "default": 7
+    },
+    {
+      "type": "checkbox",
+      "id": "exclude_weekends",
+      "label": "Exclude weekends from calculation",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "date_format",
+      "label": "Date format",
+      "options": [
+        {
+          "value": "short",
+          "label": "Short (Aug 7)"
+        },
+        {
+          "value": "long",
+          "label": "Long (August 7, 2026)"
+        },
+        {
+          "value": "numeric",
+          "label": "Numeric (7/8/2026)"
+        }
+      ],
+      "default": "short"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show delivery icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "label_font_weight",
+      "label": "Label font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "dates_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Dates font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "dates_font_weight",
+      "label": "Dates font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "dates_color",
+      "label": "Dates color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show border",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Delivery estimate"
+    }
+  ]
+}
 {% endschema %}
