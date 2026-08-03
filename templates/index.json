@@ -24,7 +24,7 @@
         "heading_mobile": "<h5></h5><h5>Premium Educational Toys That Make Learning Fun<br/></h5>",
         "heading_size": "h1",
         "description": "<h5></h5><ul><li><h5><strong>Safe & BIS-Compliant Toys</strong></h5></li><li><h5><strong>Free Shipping Across India</strong></h5></li><li><h5><strong>Trusted by 12000+ Parents</strong></h5></li><li><h5><strong>Cash on Delivery Available<br/></strong></h5></li></ul><h5><strong><br/><br/></strong></h5>",
-        "text_style": "subtitle",
+        "text_style": "body",
         "button_label_1": "Shop Best Sellers",
         "button_link_1": "shopify://collections/all",
         "button_style_secondary_1": false,
@@ -37,7 +37,7 @@
         "color_scheme": "",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
-        "show_text_below": true,
+        "show_text_below": false,
         "padding_top": 0,
         "padding_bottom": 0,
         "section_color_scheme": "scheme-3"
