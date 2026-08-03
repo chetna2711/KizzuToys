@@ -105,6 +105,13 @@
             "show_gift_card_recipient": true
           }
         },
+        "text_FynHjG": {
+          "type": "text",
+          "settings": {
+            "text": "Estimated delivery: 4 Aug to 7 Aug",
+            "text_style": "subtitle"
+          }
+        },
         "share": {
           "type": "share",
           "disabled": true,
@@ -130,6 +137,7 @@
         "text_gzgkTw",
         "quantity_selector",
         "buy_buttons",
+        "text_FynHjG",
         "share"
       ],
       "settings": {
