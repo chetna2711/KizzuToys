@@ -1,0 +1,28 @@
+{%- assign estimate_id = 'DeliveryEstimate-' | append: section.id | append: '-' | append: block.id -%}
+<style>
+  #{{ estimate_id }} { margin: {{ block.settings.margin_top }}px 0 {{ block.settings.margin_bottom }}px; padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px; color: {{ block.settings.text_color }}; background: {{ block.settings.background_color }}; border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }}; border-radius: {{ block.settings.border_radius }}px; font-size: {{ block.settings.font_size }}px; line-height: 1.45; }
+  #{{ estimate_id }} .delivery-estimate__row { display: flex; align-items: flex-start; gap: 10px; }
+  #{{ estimate_id }} .delivery-estimate__icon { width: {{ block.settings.icon_size }}px; height: {{ block.settings.icon_size }}px; flex: 0 0 auto; margin-top: .15em; color: {{ block.settings.accent_color }}; }
+  #{{ estimate_id }} .delivery-estimate__message { margin: 0; }
+  #{{ estimate_id }} .delivery-estimate__countdown, #{{ estimate_id }} .delivery-estimate__dates { font-weight: {{ block.settings.highlight_weight }}; color: {{ block.settings.accent_color }}; }
+  #{{ estimate_id }} .delivery-estimate__dates { display: inline-block; }
+  @media screen and (max-width: 749px) { #{{ estimate_id }} { font-size: {{ block.settings.mobile_font_size }}px; } }
+</style>
+<div id="{{ estimate_id }}" data-cutoff-hour="{{ block.settings.cutoff_hour }}" data-cutoff-minute="{{ block.settings.cutoff_minute }}" data-min-days="{{ block.settings.min_delivery_days }}" data-max-days="{{ block.settings.max_delivery_days }}" data-skip-weekends="{{ block.settings.skip_weekends }}" data-date-format="{{ block.settings.date_format }}" data-locale="{{ request.locale.iso_code | default: 'en-IN' }}" data-before-text="{{ block.settings.before_cutoff_text | escape }}" {{ block.shopify_attributes }}>
+  <div class="delivery-estimate__row">
+    {%- if block.settings.show_icon -%}<svg class="delivery-estimate__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 2.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>{%- endif -%}
+    <p class="delivery-estimate__message" aria-live="polite"><span data-delivery-prefix>{{ block.settings.before_cutoff_text }}</span> <span class="delivery-estimate__countdown" data-delivery-countdown>--h --m --s</span><span data-delivery-comma>,</span> {{ block.settings.receive_text }} <span class="delivery-estimate__dates"><span data-delivery-start>--/--/----</span> {{ block.settings.between_text }} <span data-delivery-end>--/--/----</span></span></p>
+  </div>
+</div>
+<script>
+  (() => {
+    const element = document.getElementById({{ estimate_id | json }});
+    if (!element) return;
+    if (element.deliveryTimer) window.clearInterval(element.deliveryTimer);
+    const addDays = (date, amount, skipWeekends) => { const result = new Date(date.getFullYear(), date.getMonth(), date.getDate()); let added = 0; while (added < amount) { result.setDate(result.getDate() + 1); const day = result.getDay(); if (!skipWeekends || (day !== 0 && day !== 6)) added++; } return result; };
+    const formatDate = (date) => { if (element.dataset.dateFormat === 'dd_mm_yyyy') return [String(date.getDate()).padStart(2,'0'), String(date.getMonth()+1).padStart(2,'0'), date.getFullYear()].join('/'); const options = element.dataset.dateFormat === 'long' ? {day:'numeric',month:'long',year:'numeric'} : {day:'numeric',month:'short'}; return new Intl.DateTimeFormat(element.dataset.locale || 'en-IN', options).format(date); };
+    const update = () => { const now = new Date(); const cutoff = new Date(now.getFullYear(),now.getMonth(),now.getDate(),Number(element.dataset.cutoffHour),Number(element.dataset.cutoffMinute)); const missedToday = now >= cutoff; if (missedToday) cutoff.setDate(cutoff.getDate()+1); const base = new Date(now); if (missedToday) base.setDate(base.getDate()+1); const remaining = Math.max(0,cutoff-now); const totalSeconds = Math.floor(remaining/1000); const h=Math.floor(totalSeconds/3600), m=Math.floor((totalSeconds%3600)/60), s=totalSeconds%60; element.querySelector('[data-delivery-prefix]').textContent = element.dataset.beforeText; element.querySelector('[data-delivery-countdown]').hidden = false; element.querySelector('[data-delivery-comma]').hidden = false; element.querySelector('[data-delivery-countdown]').textContent=`${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`; const skip=element.dataset.skipWeekends==='true'; element.querySelector('[data-delivery-start]').textContent=formatDate(addDays(base,Number(element.dataset.minDays),skip)); element.querySelector('[data-delivery-end]').textContent=formatDate(addDays(base,Number(element.dataset.maxDays),skip)); };
+    update();
+    element.deliveryTimer = window.setInterval(update, 1000);
+  })();
+</script>

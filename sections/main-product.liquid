@@ -200,6 +200,8 @@
                 </p>
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
+              {%- when 'delivery_estimate' -%}
+                {% render 'product-delivery-estimate', block: block, section: section %}
               {%- when 'collapsible_tab' -%}
                 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -947,6 +949,41 @@
           "label": "t:sections.custom-liquid.settings.custom_liquid.label",
           "info": "t:sections.custom-liquid.settings.custom_liquid.info"
         }
+      ]
+    },
+    {
+      "type": "delivery_estimate",
+      "name": "Live delivery estimate",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "Message" },
+        { "type": "text", "id": "before_cutoff_text", "label": "Before cutoff text", "default": "Order today within" },
+        { "type": "text", "id": "after_cutoff_text", "label": "After cutoff text", "default": "Order now" },
+        { "type": "text", "id": "receive_text", "label": "Delivery text", "default": "you’ll receive your package between" },
+        { "type": "text", "id": "between_text", "label": "Text between dates", "default": "to" },
+        { "type": "header", "content": "Cutoff and delivery" },
+        { "type": "range", "id": "cutoff_hour", "label": "Daily cutoff hour (24-hour)", "min": 0, "max": 23, "step": 1, "default": 17 },
+        { "type": "select", "id": "cutoff_minute", "label": "Cutoff minute", "options": [{ "value": "0", "label": "00" }, { "value": "15", "label": "15" }, { "value": "30", "label": "30" }, { "value": "45", "label": "45" }], "default": "0" },
+        { "type": "range", "id": "min_delivery_days", "label": "Earliest delivery (days)", "min": 1, "max": 30, "step": 1, "default": 3 },
+        { "type": "range", "id": "max_delivery_days", "label": "Latest delivery (days)", "min": 1, "max": 30, "step": 1, "default": 5 },
+        { "type": "checkbox", "id": "skip_weekends", "label": "Skip Saturdays and Sundays", "default": false },
+        { "type": "select", "id": "date_format", "label": "Date format", "options": [{ "value": "dd_mm_yyyy", "label": "DD/MM/YYYY" }, { "value": "short", "label": "7 Aug" }, { "value": "long", "label": "7 August 2026" }], "default": "dd_mm_yyyy" },
+        { "type": "header", "content": "Style" },
+        { "type": "checkbox", "id": "show_icon", "label": "Show clock icon", "default": true },
+        { "type": "range", "id": "icon_size", "label": "Icon size", "min": 14, "max": 32, "step": 1, "unit": "px", "default": 18 },
+        { "type": "range", "id": "font_size", "label": "Desktop font size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 18 },
+        { "type": "range", "id": "mobile_font_size", "label": "Mobile font size", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 15 },
+        { "type": "select", "id": "highlight_weight", "label": "Highlighted text weight", "options": [{ "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }], "default": "700" },
+        { "type": "color", "id": "text_color", "label": "Text color", "default": "#222222" },
+        { "type": "color", "id": "accent_color", "label": "Countdown and date color", "default": "#111111" },
+        { "type": "color", "id": "background_color", "label": "Background color", "default": "#ffffff" },
+        { "type": "color", "id": "border_color", "label": "Border color", "default": "#e5e5e5" },
+        { "type": "range", "id": "border_width", "label": "Border width", "min": 0, "max": 3, "step": 1, "unit": "px", "default": 0 },
+        { "type": "range", "id": "border_radius", "label": "Corner radius", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 0 },
+        { "type": "range", "id": "padding_vertical", "label": "Vertical padding", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 4 },
+        { "type": "range", "id": "padding_horizontal", "label": "Horizontal padding", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 0 },
+        { "type": "range", "id": "margin_top", "label": "Top spacing", "min": 0, "max": 40, "step": 4, "unit": "px", "default": 8 },
+        { "type": "range", "id": "margin_bottom", "label": "Bottom spacing", "min": 0, "max": 40, "step": 4, "unit": "px", "default": 8 }
       ]
     },
     {

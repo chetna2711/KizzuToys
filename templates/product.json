@@ -75,6 +75,36 @@
             "swatch_shape": "circle"
           }
         },
+        "delivery_estimate": {
+          "type": "delivery_estimate",
+          "settings": {
+            "before_cutoff_text": "Order today within",
+            "after_cutoff_text": "Order now",
+            "receive_text": "you’ll receive your package between",
+            "between_text": "to",
+            "cutoff_hour": 17,
+            "cutoff_minute": "0",
+            "min_delivery_days": 3,
+            "max_delivery_days": 5,
+            "skip_weekends": false,
+            "date_format": "dd_mm_yyyy",
+            "show_icon": true,
+            "icon_size": 18,
+            "font_size": 18,
+            "mobile_font_size": 15,
+            "highlight_weight": "700",
+            "text_color": "#222222",
+            "accent_color": "#111111",
+            "background_color": "#ffffff",
+            "border_color": "#e5e5e5",
+            "border_width": 0,
+            "border_radius": 0,
+            "padding_vertical": 4,
+            "padding_horizontal": 0,
+            "margin_top": 8,
+            "margin_bottom": 8
+          }
+        },
         "custom_liquid_TxTdcC": {
           "type": "custom_liquid",
           "settings": {
@@ -125,6 +155,7 @@
         "price",
         "description",
         "variant_picker",
+        "delivery_estimate",
         "custom_liquid_TxTdcC",
         "custom_liquid_BUfbd3",
         "text_gzgkTw",
@@ -147,44 +178,6 @@
         "padding_top": 36,
         "padding_bottom": 12
       }
-    },
-    "blocks_4BQy3i": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_57d1c9f_ewhXqW": {
-          "type": "ai_gen_block_57d1c9f",
-          "settings": {
-            "label_text": "Estimated delivery:",
-            "min_delivery_days": 3,
-            "max_delivery_days": 5,
-            "exclude_weekends": true,
-            "date_format": "short",
-            "show_icon": true,
-            "icon_size": 16,
-            "icon_color": "#1f1f21",
-            "label_font_size": 11,
-            "label_font_weight": "500",
-            "label_color": "#666666",
-            "dates_font_size": 11,
-            "dates_font_weight": "600",
-            "dates_color": "#1f1f21",
-            "background_color": "#f5f5f5",
-            "show_border": false,
-            "border_thickness": 1,
-            "border_color": "#e0e0e0",
-            "border_radius": 4,
-            "padding": 8,
-            "margin_top": 0,
-            "margin_bottom": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_57d1c9f_ewhXqW"
-      ],
-      "name": "Delivery estimate",
-      "settings": {}
     },
     "multirow_maLp9y": {
       "type": "multirow",
@@ -222,11 +215,7 @@
           }
         }
       },
-      "block_order": [
-        "row_tNcriG",
-        "row_QdyHkF",
-        "row_MTGzPR"
-      ],
+      "block_order": ["row_tNcriG", "row_QdyHkF", "row_MTGzPR"],
       "disabled": true,
       "name": "t:sections.multirow.presets.name",
       "settings": {
@@ -268,11 +257,5 @@
       "settings": {}
     }
   },
-  "order": [
-    "main",
-    "blocks_4BQy3i",
-    "multirow_maLp9y",
-    "related-products",
-    "1785768343ee31ad98"
-  ]
+  "order": ["main", "multirow_maLp9y", "related-products", "1785768343ee31ad98"]
 }
