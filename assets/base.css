@@ -3770,3 +3770,13 @@ header-menu > details > summary {
     height: 30px;
   }
 }
+#shopify-block-template--21183852511397__blocks_4BQy3i__ai_gen_block_57d1c9f_ewhXqW,
+#shopify-block-template--21183852511397__blocks_4BQy3i__ai_gen_block_57d1c9f_ewhXqW > div,
+#shopify-block-template--21183852511397__blocks_4BQy3i__ai_gen_block_57d1c9f_ewhXqW > * {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  text-align: right !important;
+  flex-wrap: nowrap !important;
+}
