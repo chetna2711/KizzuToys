@@ -405,5 +405,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "#shopify-block-template--21183852511397__blocks_4BQy3i__ai_gen_block_57d1c9f_ewhXqW {display: flex; justify-content: flex-end; align-items: center; white-space: nowrap; text-align: right;}"
+    ]
   }
 }
