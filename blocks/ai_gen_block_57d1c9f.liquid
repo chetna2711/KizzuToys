@@ -17,11 +17,14 @@
     {% endif %}
   }
 
-  .ai-delivery-estimate__icon-wrapper-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+ .ai-delivery-estimate__icon-wrapper-{{ ai_gen_id }} {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
 
   .ai-delivery-estimate__icon-{{ ai_gen_id }} {
     flex-shrink: 0;
