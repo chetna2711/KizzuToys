@@ -110,12 +110,23 @@
       "disabled": true,
       "name": "Delivery estimate",
       "settings": {}
+    },
+    "custom_liquid_AMg6B7": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  #shopify-block-template--21183852511397__blocks_4BQy3i__ai_gen_block_57d1c9f_ewhXqW,\n  #shopify-block-template--21183852511397__blocks_4BQy3i__ai_gen_block_57d1c9f_ewhXqW > div,\n  #shopify-block-template--21183852511397__blocks_4BQy3i__ai_gen_block_57d1c9f_ewhXqW > * {\n    display: flex !important;\n    justify-content: flex-end !important;\n    align-items: center !important;\n    white-space: nowrap !important;\n    text-align: right !important;\n    flex-wrap: nowrap !important;\n  }\n</style>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "announcement-bar",
     "header",
     "1779707031c9d7bd44",
-    "blocks_gGw8tA"
+    "blocks_gGw8tA",
+    "custom_liquid_AMg6B7"
   ]
 }
