@@ -12,7 +12,7 @@
     "featured_hero_cta_YBrKyY": {
       "type": "featured-hero-cta",
       "custom_css": [
-        ".hero-cta__description ul li h5 {display: inline-block !important; color: black !important; margin : 15px 0px !important;}"
+        ".hero-cta__description ul li h5 {display: inline-block !important; color: black !important; margin: 15px 0px !important;}"
       ],
       "name": "Featured Hero CTA",
       "settings": {
@@ -23,8 +23,8 @@
         "image_behavior": "none",
         "badge_text": "Learn Through Play",
         "badge_style": "primary",
-        "heading_desktop": "<h3><strong>Premium Educational Toys That </strong></h3><h3><strong>Make Learning Fun</strong></h3><h5></h5>",
-        "heading_mobile": "<h4><strong>Premium Educational </strong></h4><h4><strong>Toys That Make Learning Fun<br/></strong></h4>",
+        "heading_desktop": "<h3><strong>Premium Toys That </strong></h3><h3><strong>Make Childhood AMAZING!!</strong></h3>",
+        "heading_mobile": "<h4><strong>Premium  Toys That</strong></h4><h4><strong>Make Childhood AMAZING!!<br/></strong></h4>",
         "heading_size": "h1",
         "description": "<ul><li><h5><strong>Safe & BIS-Compliant Toys<br/></strong></h5></li><li><h5><strong>Free Shipping Across India<br/></strong></h5></li><li><h5><strong>Trusted by 12000+ Parents<br/></strong></h5></li><li><h5><strong>Cash on Delivery Available</strong></h5></li></ul>",
         "text_style": "body",
@@ -40,7 +40,7 @@
         "color_scheme": "scheme-3",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "left",
-        "show_text_below": false,
+        "show_text_below": true,
         "padding_top": 0,
         "padding_bottom": 0,
         "section_color_scheme": "scheme-5"
