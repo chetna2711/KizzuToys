@@ -1,0 +1,140 @@
+{{ 'viral-product-videos.css' | asset_url | stylesheet_tag }}
+
+<section id="ViralVideos-{{ section.id }}" class="viral-videos color-{{ section.settings.color_scheme }} gradient" data-section-id="{{ section.id }}">
+  <div class="viral-videos__inner page-width">
+    <header class="viral-videos__header viral-videos__header--{{ section.settings.text_alignment }}">
+      {%- if section.settings.badge != blank -%}<span class="viral-videos__badge">{{ section.settings.badge | escape }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="viral-videos__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.description != blank -%}<div class="viral-videos__description rte">{{ section.settings.description }}</div>{%- endif -%}
+    </header>
+
+    <div class="viral-videos__rail-wrap">
+      <button class="viral-videos__rail-arrow viral-videos__rail-arrow--prev" type="button" aria-label="Previous products">&#8592;</button>
+      <div class="viral-videos__rail" data-video-rail>
+        {%- for block in section.blocks -%}
+          {%- assign card_product = block.settings.product -%}
+          {%- if card_product != blank -%}
+            {%- assign product_video = blank -%}
+            {%- for media in card_product.media -%}
+              {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}{%- assign product_video = media -%}{%- break -%}{%- endif -%}
+              {%- if media.sources != blank -%}{%- assign product_video = media -%}{%- break -%}{%- endif -%}
+            {%- endfor -%}
+            <article class="viral-videos__card" style="--card-width: {{ section.settings.card_width }}px" {{ block.shopify_attributes }}>
+              <button class="viral-videos__media" type="button" data-open-video="{{ forloop.index0 }}" aria-label="Play {{ card_product.title | escape }}">
+                {%- if product_video.media_type == 'external_video' -%}
+                  {{ product_video | external_video_url: autoplay: section.settings.card_autoplay, loop: true, muted: true | external_video_tag: loading: 'lazy' }}
+                {%- elsif product_video != blank -%}
+                  {{ product_video | video_tag: autoplay: section.settings.card_autoplay, loop: true, muted: true, controls: false, playsinline: true, image_size: '700x' }}
+                {%- elsif card_product.featured_image != blank -%}
+                  {{ card_product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300, 500, 700', alt: card_product.title }}
+                  <span class="viral-videos__missing">Add a video to this product</span>
+                  {%- if request.design_mode -%}<small style="position:absolute;left:12px;right:12px;bottom:8px;padding:5px;background:#fff;color:#111;font-size:10px;line-height:1.2">Detected: {% for media in card_product.media %}{{ forloop.index }}={{ media.media_type }}{% unless forloop.last %}, {% endunless %}{% endfor %}</small>{%- endif -%}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {%- endif -%}
+                <span class="viral-videos__play" aria-hidden="true">▶</span>
+              </button>
+              <div class="viral-videos__card-info">
+                <a href="{{ card_product.url }}" class="viral-videos__title">{{ card_product.title }}</a>
+                {%- if section.settings.show_price -%}
+                  <div class="viral-videos__price">{%- render 'price', product: card_product, price_class: '', show_compare_at_price: true -%}</div>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endif -%}
+        {%- else -%}
+          {%- for index in (1..4) -%}<article class="viral-videos__card" style="--card-width: {{ section.settings.card_width }}px">{{ 'product-' | append: index | placeholder_svg_tag }}<p>Select a product in this block</p></article>{%- endfor -%}
+        {%- endfor -%}
+      </div>
+      <button class="viral-videos__rail-arrow viral-videos__rail-arrow--next" type="button" aria-label="Next products">&#8594;</button>
+    </div>
+  </div>
+
+  <div class="viral-videos__modal" data-video-modal hidden role="dialog" aria-modal="true" aria-label="Product videos">
+    <button class="viral-videos__close" type="button" data-video-close aria-label="Close">&times;</button>
+    <button class="viral-videos__modal-arrow viral-videos__modal-arrow--prev" type="button" data-modal-prev aria-label="Previous video">&#8592;</button>
+    <div class="viral-videos__slides">
+      {%- for block in section.blocks -%}
+        {%- assign card_product = block.settings.product -%}
+        {%- if card_product != blank -%}
+          {%- assign product_video = blank -%}
+          {%- for media in card_product.media -%}
+            {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}{%- assign product_video = media -%}{%- break -%}{%- endif -%}
+            {%- if media.sources != blank -%}{%- assign product_video = media -%}{%- break -%}{%- endif -%}
+          {%- endfor -%}
+          <div class="viral-videos__slide" data-video-slide="{{ forloop.index0 }}" hidden>
+            <div class="viral-videos__modal-media">
+              {%- if product_video.media_type == 'external_video' -%}
+                {{ product_video | external_video_tag: loading: 'lazy' }}
+              {%- elsif product_video != blank -%}
+                {{ product_video | video_tag: autoplay: false, loop: true, muted: false, controls: true, playsinline: true, image_size: '900x' }}
+              {%- elsif card_product.featured_image != blank -%}
+                {{ card_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: card_product.title }}
+              {%- endif -%}
+              {%- if product_video != blank and product_video.media_type != 'external_video' -%}
+                <button type="button" data-video-sound style="position:absolute;z-index:3;top:16px;right:16px;border:0;border-radius:999px;padding:10px 14px;background:rgba(0,0,0,.72);color:#fff;font-weight:700;cursor:pointer">🔊 Turn sound on</button>
+              {%- endif -%}
+              <div class="viral-videos__product-panel">
+                {%- if card_product.featured_image -%}{{ card_product.featured_image | image_url: width: 120 | image_tag: alt: card_product.title }}{%- endif -%}
+                <div class="viral-videos__panel-copy"><a href="{{ card_product.url }}">{{ card_product.title }}</a><strong>{{ card_product.price | money }}</strong></div>
+                {%- form 'product', card_product, class: 'viral-videos__form' -%}
+                  <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+                  <button class="button" type="submit" {% unless card_product.available %}disabled{% endunless %}>{% if card_product.available %}{{ section.settings.button_label }}{% else %}Sold out{% endif %}</button>
+                {%- endform -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <button class="viral-videos__modal-arrow viral-videos__modal-arrow--next" type="button" data-modal-next aria-label="Next video">&#8594;</button>
+  </div>
+</section>
+
+<script>
+(() => {
+  const root = document.getElementById('ViralVideos-{{ section.id }}');
+  if (!root || root.dataset.initialized === 'true') return;
+  root.dataset.initialized = 'true';
+  const rail = root.querySelector('[data-video-rail]');
+  const modal = root.querySelector('[data-video-modal]');
+  const slides = [...root.querySelectorAll('[data-video-slide]')];
+  let active = 0;
+  const pauseAll = () => root.querySelectorAll('.viral-videos__modal video').forEach(video => video.pause());
+  const show = index => { if (!slides.length) return; active = (index + slides.length) % slides.length; pauseAll(); slides.forEach((slide, i) => slide.hidden = i !== active); const video = slides[active].querySelector('video'); if (video) { video.muted = false; video.defaultMuted = false; video.volume = 1; video.removeAttribute('muted'); video.play().catch(() => { video.controls = true; }); } };
+  const open = index => { modal.hidden = false; document.body.classList.add('viral-video-modal-open'); show(index); root.querySelector('[data-video-close]').focus(); };
+  const close = () => { modal.hidden = true; document.body.classList.remove('viral-video-modal-open'); pauseAll(); };
+  root.querySelectorAll('[data-open-video]').forEach((button, index) => button.addEventListener('click', () => open(index)));
+  root.querySelectorAll('[data-video-sound]').forEach(button => button.addEventListener('click', event => { const video = event.currentTarget.closest('[data-video-slide]').querySelector('video'); if (!video) return; video.removeAttribute('muted'); video.defaultMuted = false; video.muted = false; video.volume = 1; video.play(); event.currentTarget.textContent = '🔊 Sound on'; }));
+  root.querySelector('[data-video-close]')?.addEventListener('click', close);
+  root.querySelector('[data-modal-prev]')?.addEventListener('click', () => show(active - 1));
+  root.querySelector('[data-modal-next]')?.addEventListener('click', () => show(active + 1));
+  modal?.addEventListener('click', event => { if (event.target === modal) close(); });
+  document.addEventListener('keydown', event => { if (modal?.hidden) return; if (event.key === 'Escape') close(); if (event.key === 'ArrowLeft') show(active - 1); if (event.key === 'ArrowRight') show(active + 1); });
+  root.querySelector('.viral-videos__rail-arrow--prev')?.addEventListener('click', () => rail.scrollBy({left: -rail.clientWidth * .8, behavior: 'smooth'}));
+  root.querySelector('.viral-videos__rail-arrow--next')?.addEventListener('click', () => rail.scrollBy({left: rail.clientWidth * .8, behavior: 'smooth'}));
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Viral product videos",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Trending now" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Viral Products" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{"value":"h2","label":"Small"},{"value":"h1","label":"Medium"},{"value":"h0","label":"Large"}], "default": "h1" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Watch our most-loved products in action.</p>" },
+    { "type": "select", "id": "text_alignment", "label": "Header alignment", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"}], "default": "center" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "card_width", "label": "Desktop card width", "min": 220, "max": 420, "step": 10, "unit": "px", "default": 300 },
+    { "type": "checkbox", "id": "card_autoplay", "label": "Autoplay card videos", "default": true },
+    { "type": "checkbox", "id": "show_price", "label": "Show price", "default": true },
+    { "type": "text", "id": "button_label", "label": "Add to cart label", "default": "ADD TO CART" }
+  ],
+  "blocks": [{ "type": "product", "name": "Product video", "settings": [{ "type": "product", "id": "product", "label": "Product", "info": "All product media are scanned in order. The first video is shown even when it comes after several images." }] }],
+  "presets": [{ "name": "Viral product videos", "blocks": [{"type":"product"},{"type":"product"},{"type":"product"},{"type":"product"}] }]
+}
+{% endschema %}
